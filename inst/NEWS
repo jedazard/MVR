@@ -1,0 +1,28 @@
+Package: MVR
+
+---------------------------------------------------------------------------------
+Date   : 2011-07-26
+o RELEASE 1.00.0
+- Initial release of the package.
+---------------------------------------------------------------------------------
+Date   : 2011-12-14
+o RELEASE 1.10.0
+- Minor fixes in the documentation.
+- The synthetic dataset is downsized to 200 variables (instead of 1000) with 40 of them (instead of 200) that are significantly different between the two sample groups.
+- Major bug fix in the internal function MeanVarReg, which was not returning the correct cluster membership values. This was affecting especially the end-user function mvrt.test().
+---------------------------------------------------------------------------------
+Date   : 2013-11-13
+o RELEASE 1.20.0
+- Now depends on 'parallel' instead of 'snow' package. This modification should be totally transparent to the users and not affect them in any way. Minor updates in the manual accordingly.
+- Now supports SOCKET, PVM and MPI clusters. Manual corrected accordingly.
+- Minor updates in the email addresses and references.
+---------------------------------------------------------------------------------
+Date   : 2015-02-01
+o RELEASE 1.21.0
+- Packages in Depends field now imported from the NAMESPACE file.
+- Compiled C code now uses the interface to R internal RNGs routines instead of the system rand RNG.
+- Test build under 3.1.2 and release update to GitHub.
+- Minor updates in the manual: examples are for a SOCKET cluster only.
+---------------------------------------------------------------------------------
+
+
