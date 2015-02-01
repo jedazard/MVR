@@ -27,10 +27,10 @@ The companion papers can be accessed here:
 Comput. Statist. Data Anal. (2012):
 http://www.sciencedirect.com/science/article/pii/S0167947312000321
 
-JSM Proceedings 2011 (ASA-IMS): 
+ASA-IMS JSM Proceedings (2011): 
 https://www.amstat.org/membersonly/proceedings/2011/papers/302266_68145.pdf
 
-JSM Proceedings 2010 (ASA-IMS): 
+ASA-IMS JSM Proceedings (2010): 
 https://www.amstat.org/membersonly/proceedings/2010/papers/309104_62376.pdf
 
 See also below on how to cite the package with the R command: citation("MVR").
