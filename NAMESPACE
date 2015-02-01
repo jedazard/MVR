@@ -1,7 +1,5 @@
 useDynLib(MVR, .registration=TRUE)
 
-exportPattern("^[[:alpha:]]+")
-
 export(MVR.news, 
        mvr,
        mvrt.test,
