@@ -43,14 +43,14 @@ All the codes are in the R folder and a manual (MVR.pdf) details the end-user (a
 =============
 Installation: 
 =============
-MVR 1.21.0 was built under R version 3.1.2 (2014-10-31).
+MVR 1.20.0 was built under R version 3.1.2 (2014-10-31).
 Installation has been tested on Windows, Linux and Mac platforms.
 To install the current software, download the version from the CRAN repository:
 
 http://cran.r-project.org/web/packages/MVR/index.html
 
 
-To install the development version, simply type:
+To install the development version 1.21.0, simply type:
 
 library(devtools)
 
