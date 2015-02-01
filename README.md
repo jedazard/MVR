@@ -7,9 +7,13 @@ paradigm), such as in omics-type data, among which are that the variance is ofte
 mean, variable-specific estimators of variances are not reliable, and tests statistics have low powers
 due to a lack of degrees of freedom.
 Key features include:
+
 1. Normalization and/or variance stabilization of the data
+
 2. Computation of mean-variance-regularized t-statistics (F-statistics to come)
+
 3. Generation of diverse diagnostic plots
+
 4. Computationally efficient implementation using C/C++ interfacing and an option for parallel
 computing to enjoy a fast and easy experience in the R environment
 
@@ -20,7 +24,7 @@ References
 ==========
 The companion papers can be accessed here:
 
-Comput. Statist. Data Anal. (2012) 
+Comput. Statist. Data Anal. (2012):
 http://www.sciencedirect.com/science/article/pii/S0167947312000321
 
 JSM Proceedings 2011 (ASA-IMS): 
