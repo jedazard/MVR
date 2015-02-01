@@ -44,3 +44,18 @@ citEntry(entry       = "Proceedings",
                         R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.
                         In JSM Proceedings, Section for Statistical Programmers and Analysts. Miami Beach, FL, USA.
                         American Statistical Association-IMS, p. 3849-3863.")
+
+citEntry(entry       = "Proceedings",
+         title       = "Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data",
+         author      = personList(person(family="Dazard", given="J-E."),
+                                  person(family="Rao", given="J.S.")),
+         journal     = "JSM Proceedings.
+                        Section for High-Dimensional Data Analysis and Variable Selection. 
+                        Vancouver, BC, Canada.
+                        American Statistical Association-IMS",
+         year        = "2010",
+         pages       = "5295-5309",
+         textVersion = "Dazard J-E. and Rao J.S. (2010).
+                        Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.
+                        In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. Vancouver, BC, Canada.
+                        American Statistical Association-IMS, p. 5295-5309.")

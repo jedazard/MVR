@@ -22,7 +22,7 @@ o RELEASE 1.21.0
 - Packages in Depends field now imported from the NAMESPACE file.
 - Compiled C code now uses the interface to R internal RNGs routines instead of the system rand RNG.
 - Test build under 3.1.2 and release update to GitHub.
-- Minor updates in the manual: examples are for a SOCKET cluster only.
+- Minor updates in the citations and manual: examples are for a SOCKET cluster only.
 ---------------------------------------------------------------------------------
 
 
