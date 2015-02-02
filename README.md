@@ -19,6 +19,8 @@ computing to enjoy a fast and easy experience in the R environment
 
 See also below the package news with the R command: MVR.news().
 
+MVR is Open Source / Free Software, and is freely available under the GNU General Public License, version 3.
+
 ==========
 References
 ==========
