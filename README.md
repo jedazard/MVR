@@ -52,7 +52,7 @@ To install the current software, download the version from the CRAN repository:
 http://cran.r-project.org/web/packages/MVR/index.html
 
 
-To install the development version 1.21.0, simply type:
+To install the developmental version 1.21.0, simply type:
 
 library(devtools)
 
