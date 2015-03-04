@@ -17,12 +17,17 @@ o RELEASE 1.20.0
 - Now supports SOCKET, PVM and MPI clusters. Manual corrected accordingly.
 - Minor updates in the email addresses and references.
 ---------------------------------------------------------------------------------
-Date   : 2015-02-01
-o RELEASE 1.21.0
-- Packages in Depends field now imported from the NAMESPACE file.
+Date   : 2015-03-04
+o RELEASE 1.30.0
+- Packages in Depends field are now imported from the NAMESPACE file.
 - Compiled C code now uses the interface to R internal RNGs routines instead of the system rand RNG.
-- Test build under 3.1.2 and release update to GitHub.
-- Minor updates in the citations and manual: examples are for a SOCKET cluster only.
+- Compiled C code now successfully passes Valgrind memory check. 
+- Removed superfluous codes in the parallelization section, before clusterCall().
+- Main function mvr() now returns shrinkage estimates of means and standard deviations by groups. 
+- Improved codes for all plotting functions, including new graphical device arguments.
+- Updates in the manual: examples are given for a SOCKET or MPI cluster configuration.
+- Updated manual, citations and version number.
+- Test build under 3.0.2 and release update to GitHub.
 ---------------------------------------------------------------------------------
 
 
