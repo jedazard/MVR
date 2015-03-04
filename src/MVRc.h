@@ -1,3 +1,5 @@
+extern "C" {
+
 //=======//
 // MVR.h //
 //=======//
@@ -190,3 +192,4 @@ void MVR_withinsumsq(int* pn,
                      int* perror
                      );
 #endif
+}
