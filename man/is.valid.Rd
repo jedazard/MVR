@@ -30,11 +30,11 @@
 }
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
     
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).

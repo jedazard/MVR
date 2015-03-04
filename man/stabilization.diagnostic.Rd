@@ -1,17 +1,25 @@
 \name{stabilization.diagnostic}
+
 \alias{stabilization.diagnostic}
+
 \title{Function for Plotting Summary Variance Stabilization Diagnostic Plots}
+
 \description{
     Plot comparative variance-mean plots to check the variance stabilization across variables before and after Mean-Variance Regularization.
 }
+
 \usage{
     stabilization.diagnostic(obj, 
-                             title = "", 
                              span = 0.5, 
                              degree = 2, 
                              family = "gaussian", 
+                             title = "", 
                              device = NULL, 
-                             file = "Stabilization Diagnostic Plots")
+                             file = "Stabilization Diagnostic Plots",
+                             path = getwd(),
+                             horizontal = FALSE, 
+                             width = 7, 
+                             height = 5, ...)
 }
 
 \arguments{
@@ -23,10 +31,16 @@
                 Defaults to 2. (Normally 1 or 2. Degree 0 is also allowed, but see the "Note" in loess {stats} package.)}
   \item{family}{Family distribution in {"gaussian", "symmetric"} of the \code{loess()} function (R package \pkg{stats}), used for local fitting .
                 If "gaussian" fitting is by least-squares, and if "symmetric" a re-descending M estimator is used with Tukey's biweight function.}
-  \item{device}{Graphic display device in \{NULL, "PS", "PDF"\}. Defaults to NULL (screen).
+  \item{device}{Graphic display device in \{NULL, "PS", "PDF"\}. Defaults to NULL (standard output screen).
                 Currently implemented graphic display devices are "PS" (Postscript) or "PDF" (Portable Document Format).}
   \item{file}{File name for output graphic. Defaults to "Stabilization Diagnostic Plots".}
+  \item{path}{Absolute path (without final (back)slash separator). Defaults to working directory path.}
+  \item{horizontal}{\code{Logical} scalar. Orientation of the printed image. Defaults to \code{FALSE}, that is potrait orientation.}
+  \item{width}{\code{Numeric} scalar. Width of the graphics region in inches. Defaults to 7.}
+  \item{height}{\code{Numeric} scalar. Height of the graphics region in inches. Defaults to 5.}
+  \item{\dots}{Generic arguments passed to other plotting functions.}
 }
+
 \details{
     In the plots of standard deviations vs. means, standard deviations and means are calculated in a feature-wise manner from the expression matrix.
     The scatterplot allows to visually verify whether there is a dependence of the standard deviation (or variance) on the mean. 
@@ -35,9 +49,11 @@
     
     Option \code{file} is used only if device is specified (i.e. non \code{NULL}).
 }
+
 \value{
     None. Displays the plots on the chosen \code{device}.
 }
+
 \references{
     \itemize{
         \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
@@ -46,17 +62,19 @@
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }
+
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
     
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).
 }
+
 \note{
     End-user function.
 }
@@ -68,90 +86,108 @@
 
 \examples{
 \dontrun{
-#===================================================
-# Loading the library and its dependencies
-#===================================================
-library("MVR")
+    #===================================================
+    # Loading the library and its dependencies
+    #===================================================
+    library("MVR")
 
-#===================================================
-# Loading of the Synthetic and Real datasets 
-# (see description of datasets)
-#===================================================
-data("Synthetic", "Real", package="MVR")
+    #===================================================
+    # MVR package news
+    #===================================================
+    MVR.news()
 
-#===================================================
-# Mean-Variance Regularization (Real dataset)
-# Multi-Group Assumption
-# Assuming unequal variance between groups
-# Without cluster usage
-#===================================================
-nc.min <- 1
-nc.max <- 30
-probs <- seq(0, 1, 0.01)
-n <- 6
-GF <- factor(gl(n = 2, k = n/2, len = n), 
-             ordered = FALSE, 
-             labels = c("M", "S"))
-mvr.obj <- mvr(data = Real, 
-               block = GF, 
-               log = FALSE, 
-               nc.min = nc.min, 
-               nc.max = nc.max, 
-               probs = probs,
-               B = 100, 
-               parallel = FALSE, 
-               conf = NULL,
-               verbose = TRUE)
+    #================================================
+    # MVR package citation
+    #================================================
+    citation("MVR")
 
-#===================================================
-# Summary Stabilization Diagnostic Plots (Real dataset)
-# Multi-Group Assumption
-# Assuming unequal variance between groups
-#===================================================
-stabilization.diagnostic(obj = mvr.obj, 
-                         title = "Stabilization Diagnostic Plots 
-                         (Real - Multi-Group Assumption)",
-                         span = 0.75, 
-                         degree = 2, 
-                         family = "gaussian",
-                         device = "PS")
+    #===================================================
+    # Loading of the Synthetic and Real datasets
+    # (see description of datasets)
+    #===================================================
+    data("Synthetic", "Real", package="MVR")
+    ?Synthetic
+    ?Real
 
-#===================================================
-# Mean-Variance Regularization (Real dataset)
-# Single-Group Assumption
-# Assuming equal variance between groups
-# Without cluster usage
-#===================================================
-nc.min <- 1
-nc.max <- 30
-probs <- seq(0, 1, 0.01)
-n <- 6
-mvr.obj <- mvr(data = Real, 
-               block = rep(1,n), 
-               log = FALSE, 
-               nc.min = nc.min, 
-               nc.max = nc.max, 
-               probs = probs, 
-               B = 100, 
-               parallel = FALSE, 
-               conf = NULL, 
-               verbose = TRUE)
+    #===================================================
+    # Mean-Variance Regularization (Real dataset)
+    # Multi-Group Assumption
+    # Assuming unequal variance between groups
+    # Without cluster usage
+    #===================================================
+    nc.min <- 1
+    nc.max <- 30
+    probs <- seq(0, 1, 0.01)
+    n <- 6
+    GF <- factor(gl(n = 2, k = n/2, len = n), 
+                 ordered = FALSE, 
+                 labels = c("M", "S"))
+    mvr.obj <- mvr(data = Real, 
+                   block = GF, 
+                   log = FALSE, 
+                   nc.min = nc.min, 
+                   nc.max = nc.max, 
+                   probs = probs,
+                   B = 100, 
+                   parallel = FALSE, 
+                   conf = NULL,
+                   verbose = TRUE)
 
-#===================================================
-# Summary Stabilization Diagnostic Plots (Real dataset)
-# Single-Group Assumption
-# Assuming equal variance between groups
-#===================================================
-stabilization.diagnostic(obj = mvr.obj, 
-                         title = "Stabilization Diagnostic Plots 
-                         (Real - Single-Group Assumption)", 
-                         span = 0.75, 
-                         degree = 2, 
-                         family = "gaussian",
-                         device = NULL)
+    #===================================================
+    # Summary Stabilization Diagnostic Plots (Real dataset)
+    # Multi-Group Assumption
+    # Assuming unequal variance between groups
+    #===================================================
+    stabilization.diagnostic(obj = mvr.obj, 
+                             title = "Stabilization Diagnostic Plots 
+                             (Real - Multi-Group Assumption)",
+                             span = 0.75, 
+                             degree = 2, 
+                             family = "gaussian",
+                             device = NULL,
+                             horizontal = FALSE, 
+                             width = 7, 
+                             height = 5)
 
+    #===================================================
+    # Mean-Variance Regularization (Real dataset)
+    # Single-Group Assumption
+    # Assuming equal variance between groups
+    # Without cluster usage
+    #===================================================
+    nc.min <- 1
+    nc.max <- 30
+    probs <- seq(0, 1, 0.01)
+    n <- 6
+    mvr.obj <- mvr(data = Real, 
+                   block = rep(1,n), 
+                   log = FALSE, 
+                   nc.min = nc.min, 
+                   nc.max = nc.max, 
+                   probs = probs, 
+                   B = 100, 
+                   parallel = FALSE, 
+                   conf = NULL, 
+                   verbose = TRUE)
+
+    #===================================================
+    # Summary Stabilization Diagnostic Plots (Real dataset)
+    # Single-Group Assumption
+    # Assuming equal variance between groups
+    #===================================================
+    stabilization.diagnostic(obj = mvr.obj, 
+                             title = "Stabilization Diagnostic Plots 
+                             (Real - Single-Group Assumption)", 
+                             span = 0.75, 
+                             degree = 2, 
+                             family = "gaussian",
+                             device = NULL,
+                             horizontal = FALSE, 
+                             width = 7, 
+                             height = 5)
+    }
 }
-}
+
 \keyword{Mean-Variance Estimators}
 \keyword{Regularization}
 \keyword{Variance Stabilization}

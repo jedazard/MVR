@@ -1,6 +1,9 @@
 \name{cluster.diagnostic}
+
 \alias{cluster.diagnostic}
+
 \title{Function for Plotting Summary Cluster Diagnostic Plots}
+
 \description{
     Plot similarity statistic profiles and the optimal joint clustering configuration for the means and the variances by group.
     
@@ -8,15 +11,21 @@
     of first and second moments of the MVR-transformed data approch their respective null distributions under the optimal configuration found, 
     assuming independence and normality of all the variables.
 }
+
 \usage{
     cluster.diagnostic(obj, 
-                       title = "", 
                        span = 0.75, 
                        degree = 2, 
                        family = "gaussian", 
+                       title = "", 
                        device = NULL, 
-                       file = "Cluster Diagnostic Plots")
+                       file = "Cluster Diagnostic Plots",
+                       path = getwd(),
+                       horizontal = FALSE, 
+                       width = 8.5, 
+                       height = 11, ...)
 }
+
 \arguments{
   \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
   \item{title}{Title of the plot. Defaults to the empty string.}
@@ -26,10 +35,16 @@
                 Defaults to 2. (Normally 1 or 2. Degree 0 is also allowed, but see the "Note" in loess {stats} package.)}
   \item{family}{Family distribution in {"gaussian", "symmetric"} of the \code{loess()} function (R package \pkg{stats}), used for local fitting .
                 If "gaussian" fitting is by least-squares, and if "symmetric" a re-descending M estimator is used with Tukey's biweight function.}
-  \item{device}{Graphic display device in \{NULL, "PS", "PDF"\}. Defaults to NULL (screen).
+  \item{device}{Graphic display device in \{NULL, "PS", "PDF"\}. Defaults to NULL (standard output screen).
                 Currently implemented graphic display devices are "PS" (Postscript) or "PDF" (Portable Document Format).}
   \item{file}{File name for output graphic. Defaults to "Cluster Diagnostic Plots".}
+  \item{path}{Absolute path (without final (back)slash separator). Defaults to working directory path.}
+  \item{horizontal}{\code{Logical} scalar. Orientation of the printed image. Defaults to \code{FALSE}, that is potrait orientation.}
+  \item{width}{\code{Numeric} scalar. Width of the graphics region in inches. Defaults to 8.5.}
+  \item{height}{\code{Numeric} scalar. Height of the graphics region in inches. Defaults to 11.}
+  \item{\dots}{Generic arguments passed to other plotting functions.}
 }
+
 \details{
     In a plot of a similarity statistic profile, one checks the goodness of fit of the transformed data relative to the hypothesized underlying reference 
     distribution with mean-0 and standard deviation-1 (e.g. \eqn{N(0, 1)}). The red dashed line depicts the LOESS scatterplot smoother estimator.
@@ -58,9 +73,11 @@
     
     Option \code{file} is used only if device is specified (i.e. non \code{NULL}).
 }
+
 \value{
     None. Displays the plots on the chosen \code{device}.
 }
+
 \references{
     \itemize{
         \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
@@ -69,17 +86,19 @@
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }
+
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
     
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).
 }
+
 \note{
     End-user function.
 }
@@ -87,92 +106,111 @@
 \seealso{
     \code{loess} (R package \pkg{stats}) Fit a polynomial surface determined by one or more numerical predictors, using local fitting.
 }
+
 \examples{
 \dontrun{
-#===================================================
-# Loading the library and its dependencies
-#===================================================
-library("MVR")
+    #===================================================
+    # Loading the library and its dependencies
+    #===================================================
+    library("MVR")
 
-#===================================================
-# Loading of the Synthetic and Real datasets 
-# (see description of datasets)
-#===================================================
-data("Synthetic", "Real", package="MVR")
+    #===================================================
+    # MVR package news
+    #===================================================
+    MVR.news()
 
-#===================================================
-# Mean-Variance Regularization (Real dataset)
-# Multi-Group Assumption
-# Assuming unequal variance between groups
-# Without cluster usage
-#===================================================
-nc.min <- 1
-nc.max <- 30
-probs <- seq(0, 1, 0.01)
-n <- 6
-GF <- factor(gl(n = 2, k = n/2, len = n), 
-             ordered = FALSE, 
-             labels = c("M", "S"))
-mvr.obj <- mvr(data = Real, 
-               block = GF, 
-               log = FALSE, 
-               nc.min = nc.min, 
-               nc.max = nc.max, 
-               probs = probs,
-               B = 100, 
-               parallel = FALSE, 
-               conf = NULL,
-               verbose = TRUE)
+    #================================================
+    # MVR package citation
+    #================================================
+    citation("MVR")
 
-#===================================================
-# Summary Cluster Diagnostic Plots (Real dataset)
-# Multi-Group Assumption
-# Assuming unequal variance between groups
-#===================================================
-cluster.diagnostic(obj = mvr.obj, 
-                   title = "Cluster Diagnostic Plots 
-                   (Real - Multi-Group Assumption)",
-                   span = 0.75, 
-                   degree = 2, 
-                   family = "gaussian",
-                   device = "PS")
+    #===================================================
+    # Loading of the Synthetic and Real datasets
+    # (see description of datasets)
+    #===================================================
+    data("Synthetic", "Real", package="MVR")
+    ?Synthetic
+    ?Real
 
-#===================================================
-# Mean-Variance Regularization (Real dataset)
-# Single-Group Assumption
-# Assuming equal variance between groups
-# Without cluster usage
-#===================================================
-nc.min <- 1
-nc.max <- 30
-probs <- seq(0, 1, 0.01)
-n <- 6
-mvr.obj <- mvr(data = Real, 
-               block = rep(1,n), 
-               log = FALSE, 
-               nc.min = nc.min, 
-               nc.max = nc.max, 
-               probs = probs, 
-               B = 100, 
-               parallel = FALSE, 
-               conf = NULL, 
-               verbose = TRUE)
+    #===================================================
+    # Mean-Variance Regularization (Real dataset)
+    # Multi-Group Assumption
+    # Assuming unequal variance between groups
+    # Without cluster usage
+    ===================================================
+    nc.min <- 1
+    nc.max <- 30
+    probs <- seq(0, 1, 0.01)
+    n <- 6
+    GF <- factor(gl(n = 2, k = n/2, len = n), 
+                 ordered = FALSE, 
+                 labels = c("M", "S"))
+    mvr.obj <- mvr(data = Real, 
+                   block = GF, 
+                   log = FALSE, 
+                   nc.min = nc.min, 
+                   nc.max = nc.max, 
+                   probs = probs,
+                   B = 100, 
+                   parallel = FALSE, 
+                   conf = NULL,
+                   verbose = TRUE)
 
-#===================================================
-# Summary Cluster Diagnostic Plots (Real dataset)
-# Single-Group Assumption
-# Assuming equal variance between groups
-#===================================================
-cluster.diagnostic(obj = mvr.obj, 
-                   title = "Cluster Diagnostic Plots 
-                   (Real - Single-Group Assumption)",
-                   span = 0.75, 
-                   degree = 2, 
-                   family = "gaussian",
-                   device = NULL)
+    #===================================================
+    # Summary Cluster Diagnostic Plots (Real dataset)
+    # Multi-Group Assumption
+    # Assuming unequal variance between groups
+    #===================================================
+    cluster.diagnostic(obj = mvr.obj, 
+                       title = "Cluster Diagnostic Plots 
+                       (Real - Multi-Group Assumption)",
+                       span = 0.75, 
+                       degree = 2, 
+                       family = "gaussian",
+                       device = NULL,
+                       horizontal = FALSE, 
+                       width = 8.5, 
+                       height = 11)
 
+    #===================================================
+    # Mean-Variance Regularization (Real dataset)
+    # Single-Group Assumption
+    # Assuming equal variance between groups
+    # Without cluster usage
+    #===================================================
+    nc.min <- 1
+    nc.max <- 30
+    probs <- seq(0, 1, 0.01)
+    n <- 6
+    mvr.obj <- mvr(data = Real, 
+                   block = rep(1,n), 
+                   log = FALSE, 
+                   nc.min = nc.min, 
+                   nc.max = nc.max, 
+                   probs = probs, 
+                   B = 100, 
+                   parallel = FALSE, 
+                   conf = NULL, 
+                   verbose = TRUE)
+
+    #===================================================
+    # Summary Cluster Diagnostic Plots (Real dataset)
+    # Single-Group Assumption
+    # Assuming equal variance between groups
+    #===================================================
+    cluster.diagnostic(obj = mvr.obj, 
+                       title = "Cluster Diagnostic Plots 
+                       (Real - Single-Group Assumption)",
+                       span = 0.75, 
+                       degree = 2, 
+                       family = "gaussian",
+                       device = NULL,
+                       horizontal = FALSE,
+                       width = 8.5,
+                       height = 11)
+    }
 }
-}
+
 \keyword{Mean-Variance Estimators}
 \keyword{Regularization}
 \keyword{Variance Stabilization}

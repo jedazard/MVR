@@ -2,9 +2,10 @@
 \alias{MeanVarReg}
 \title{Mean-Variance Regularization Core Subroutine}
 \description{
-    Core subroutine of \code{\link[MVR]{mvr}} and \code{\link[MVR]{mvrt.test}} functions for
-    mean-variance regularization and variance stabilization, and the computation of regularized test-statistics. 
-    Returns optimal cluster configuration. 
+    Core subroutine of \code{\link[MVR]{mvr}} and \code{\link[MVR]{mvrt.test}} 
+    functions for mean-variance regularization and variance stabilization, 
+    and the computation of regularized test-statistics. 
+    Returns optimal cluster configuration, quantiles values and shrinkage estimates of means and standard deviations by groups. 
     Internal function called by \code{\link[MVR]{mvr}} and internally by \code{\link[MVR]{mvrt}}.
 }
 \usage{
@@ -21,7 +22,8 @@
   \item{B}{Positive \code{integer} scalar of the number of Monte Carlo replicates 
            of the inner loop of the sim statistic function.}
   \item{probs}{\code{numeric} \code{vector} of probabilities for quantile diagnostic plots.}
-  \item{parallel}{\code{logical} scalar. Is parallel computing to be performed? Optional, defaults to \code{FALSE}.}           
+  \item{parallel}{\code{logical} scalar. Is parallel computing to be performed? 
+              Optional, defaults to \code{FALSE}.}           
   \item{conf}{\code{list} of parameters for cluster configuration, passed from \code{\link[MVR]{mvr}} 
               or \code{\link[MVR]{mvrt.test}} functions for parallel computing.
               Inputs for R package \pkg{parallel} function \code{makeCluster} (R package \pkg{parallel}) for cluster setup.
@@ -36,6 +38,10 @@
     \item{nc}{Positive \code{integer} scalar of number of clusters found in optimal cluster configuration}
     \item{gap}{\code{numeric} \code{vector} of the similarity statistic values}
     \item{sde}{\code{numeric} \code{vector} of the standard errors of the similarity statistic values}
+    \item{mu.std}{\code{numeric} \code{matrix} (\code{K} x p) of the vector of standardized means by groups (rows), 
+                  where \code{K} = \#groups and \code{p} = \#variables}
+    \item{sd.std}{\code{numeric} \code{matrix} (\code{K} x p) of the vector of standardized standard deviations by groups (rows),
+                  where \code{K} = \#groups and \code{p} = \#variables}
     \item{mu.quant}{\code{numeric} \code{matrix} (\code{nc.max} - \code{nc.min} + 1) x (length(\code{probs})) of quantiles of means}
     \item{sd.quant}{\code{numeric} \code{matrix} (\code{nc.max} - \code{nc.min} + 1) x (length(\code{probs})) of quantiles of standard deviations}
 }
@@ -49,11 +55,11 @@
 }
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
     
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).

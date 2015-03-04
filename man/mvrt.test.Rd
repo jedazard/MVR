@@ -1,6 +1,9 @@
 \name{mvrt.test}
+
 \alias{mvrt.test}
+
 \title{Function for Computing Mean-Variance Regularized T-test Statistic and Its Significance}
+
 \description{
     End-user function for computing MVR t-test statistic and its significance (p-value) 
     under sample group homoscedasticity or heteroscedasticity assumption. 
@@ -8,6 +11,7 @@
     Return an object of class "\code{mvrt.test}". Offers the option of parallel computation for 
     improved efficiency.
 }
+
 \usage{
     mvrt.test(data, 
               obj=NULL,
@@ -22,6 +26,7 @@
               conf = NULL,
               verbose = TRUE)
 }
+
 \arguments{
   \item{data}{\code{numeric} \code{matrix} of untransformed (raw) data, 
               where samples are by rows and variables (to be clustered) are by columns, 
@@ -49,12 +54,13 @@
               Optional, defaults to \code{NULL}. See details for usage.}
   \item{verbose}{\code{logical} scalar. Is the output to be verbose? Optional, defaults to \code{TRUE}.}
 }
+
 \details{
     Argument \code{block} is a \code{vector} or a \code{factor} grouping/blocking variable. It must be of length sample size 
     with as many different \code{character} or \code{numeric} values as the number of levels or sample groups.
     The number of sample groups must be greater or equal to 2, and all group sample sizes must be greater than 1, otherwise the program will stop.
     
-    Argument \code{nc.max} currently defaults to 30. We found in our hands that this is enough for most datasets tested.
+    Argument \code{nc.max} currently defaults to 30. Empirically, we found that this is enough for most datasets tested.
     This depends on (i) the dimensionality/sample size ratio \eqn{\frac{p}{n}}, (ii) the signal/noise ratio, and 
     (iii) whether a pre-transformation has been applied (see \cite{Dazard, J-E. and J. S. Rao (2012)} for more details).
     See the cluster diagnostic function \code{\link[MVR]{cluster.diagnostic}} for more details, whether larger values of \code{nc.max} may be required.
@@ -97,12 +103,14 @@
     the cluster configuration will only be used for the parallel computation of p-values, but not for the MVR clustering computation 
     of the regularized t-test statistics.
 }
+
 \value{
     \item{statistic}{\code{vector}, of size the number of variables, 
                      where entries are the t-statistics values of each variable.}
     \item{p.value}{\code{vector}, of size the number of variables, 
                    where entries are the p-values (if requested, otherwise \code{NULL} value) of each variable.}
 }
+
 \references{
     \itemize{
         \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
@@ -111,20 +119,23 @@
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }
+
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
     
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).
 }
+
 \note{
     End-user function.
 }
+
 \seealso{
     \itemize{
         \item \code{makeCluster} (R package \pkg{parallel})
@@ -135,27 +146,32 @@
         \item \code{bayesT} Hierarchical Bayesian Regularized t-test statistic \cite{Baldi et al., 2001}
     }
 }
+
 \examples{
 #================================================
 # Loading the library and its dependencies
 #================================================
 library("MVR")
 
-#================================================
-# MVR package news
-#================================================
-MVR.news()
+\dontrun{
+    #===================================================
+    # MVR package news
+    #===================================================
+    MVR.news()
 
-#================================================
-# MVR package citation
-#================================================
-citation("MVR")
+    #================================================
+    # MVR package citation
+    #================================================
+    citation("MVR")
 
-#================================================
-# Loading of the Synthetic and Real datasets 
-# (see description of datasets)
-#================================================
-data("Synthetic", "Real", package="MVR")
+    #===================================================
+    # Loading of the Synthetic and Real datasets
+    # (see description of datasets)
+    #===================================================
+    data("Synthetic", "Real", package="MVR")
+    ?Synthetic
+    ?Real
+}
 
 #================================================
 # Regularized t-test statistics (Synthetic dataset) 
@@ -189,75 +205,99 @@ mvrt.obj <- mvrt.test(obj = mvr.obj,
                       verbose = TRUE)
                       
 \dontrun{
-#===================================================
-# SOCKET cluster configuration 
-# - On a 2-Quad (8-CPUs) PC
-# - On a 4-nodes (32-CPUs) cluster
-#   with 1 masternode and 3 workernodes
-#   All hosts run identical setups 
-#   Same number of core CPUs (8) per node
-#===================================================
-if (.Platform$OS.type == "windows") {
-    cpus <- detectCores()
-    conf <- list("names" = rep("localhost", cpus),
-                 "cpus" = cpus,
-                 "type" = "SOCK",
-                 "homo" = TRUE,
-                 "verbose" = TRUE,
-                 "outfile" = "")
-} else if (.Platform$OS.type == "unix") {
-    masterhost <- Sys.getenv("HOSTNAME")
-    slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
-    nodes <- length(slavehosts) + 1
-    cpus <- 8
-    conf <- list("names" = c(rep(masterhost, cpus), 
-                             rep(slavehosts, cpus)),
-                 "cpus" = nodes * cpus,
-                 "type" = "SOCK",
-                 "homo" = TRUE,
-                 "verbose" = TRUE,
-                 "outfile" = "")
-} else {
-    warning("OS not recognized \n")
+    #===================================================
+    # Examples of parallelization below with 
+    # a SOCKET or MPI cluster configuration
+    #===================================================
+    # 1- WINDOWS multicores PC with SOCKET communication
+    #    With a 2-Quad (8-CPUs) PC
+    #===================================================
+    if (.Platform$OS.type == "windows") {
+        cpus <- detectCores()
+        conf <- list("names" = rep("localhost", cpus),
+                     "cpus" = cpus,
+                     "type" = "SOCK",
+                     "homo" = TRUE,
+                     "verbose" = TRUE,
+                     "outfile" = "")
+    }
+    #===================================================
+    # 2- LINUX multinodes cluster with SOCKET communication
+    #    with 4-nodes (32-CPUs) cluster
+    #    with 1 masternode and 3 workernodes
+    #    All hosts run identical setups
+    #    Same number of core CPUs (8) per node
+    #===================================================
+    if (.Platform$OS.type == "unix") {
+        masterhost <- Sys.getenv("HOSTNAME")
+        slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
+        nodes <- length(slavehosts) + 1
+        cpus <- 8
+        conf <- list("names" = c(rep(masterhost, cpus),
+                                 rep(slavehosts, cpus)),
+                     "cpus" = nodes * cpus,
+                     "type" = "SOCK",
+                     "homo" = TRUE,
+                     "verbose" = TRUE,
+                     "outfile" = "")
+    }
+    #===================================================
+    # 3- LINUX multinodes cluster with MPI communication
+    #    Here, a file named ".nodes" (e.g. in the home directory)
+    #    must contain the list of nodes of the cluster
+    #===================================================
+    if (.Platform$OS.type == "unix") {
+        hosts <- scan(file=paste(Sys.getenv("HOME"), "/.nodes", sep=""), 
+                      what="", 
+                      sep="\n")
+        hostnames <- unique(hosts)
+        nodes <- length(hostnames)
+        cpus <-  length(hosts)/length(hostnames)
+        conf <- list("cpus" = nodes * cpus,
+                     "type" = "MPI",
+                     "homo" = TRUE,
+                     "verbose" = TRUE,
+                     "outfile" = "")
+    }
+    #===================================================
+    # Mean-Variance Regularization (Real dataset)
+    # Multi-Group Assumption
+    # Assuming unequal variance between groups
+    #===================================================
+    nc.min <- 1
+    nc.max <- 30
+    probs <- seq(0, 1, 0.01)
+    n <- 6
+    GF <- factor(gl(n = 2, k = n/2, len = n), 
+                 ordered = FALSE, 
+                 labels = c("M", "S"))
+    mvr.obj <- mvr(data = Real, 
+                   block = GF, 
+                   tolog = FALSE, 
+                   nc.min = nc.min, 
+                   nc.max = nc.max, 
+                   probs = probs,
+                   B = 100, 
+                   parallel = TRUE, 
+                   conf = conf,
+                   verbose = TRUE)
+    #===================================================
+    # Regularized t-test statistics (Real dataset) 
+    # Multi-Group Assumption
+    # Assuming unequal variance between groups
+    # With option to use prior MVR clustering results
+    # With computation of p-values
+    #===================================================
+    mvrt.obj <- mvrt.test(obj = mvr.obj, 
+                          pval = TRUE, 
+                          replace = FALSE, 
+                          n.resamp = 100, 
+                          parallel = TRUE, 
+                          conf = conf,
+                          verbose = TRUE)
+    }
 }
-#===================================================
-# Mean-Variance Regularization (Real dataset)
-# Multi-Group Assumption
-# Assuming unequal variance between groups
-#===================================================
-nc.min <- 1
-nc.max <- 30
-probs <- seq(0, 1, 0.01)
-n <- 6
-GF <- factor(gl(n = 2, k = n/2, len = n), 
-             ordered = FALSE, 
-             labels = c("M", "S"))
-mvr.obj <- mvr(data = Real, 
-               block = GF, 
-               tolog = FALSE, 
-               nc.min = nc.min, 
-               nc.max = nc.max, 
-               probs = probs,
-               B = 100, 
-               parallel = TRUE, 
-               conf = conf,
-               verbose = TRUE)
-#===================================================
-# Regularized t-test statistics (Real dataset) 
-# Multi-Group Assumption
-# Assuming unequal variance between groups
-# With option to use prior MVR clustering results
-# With computation of p-values
-#===================================================
-mvrt.obj <- mvrt.test(obj = mvr.obj, 
-                      pval = TRUE, 
-                      replace = FALSE, 
-                      n.resamp = 100, 
-                      parallel = TRUE, 
-                      conf = conf,
-                      verbose = TRUE)
-}
-}
+
 \keyword{Mean-Variance Estimators}
 \keyword{Regularized Test Statistics}
 \keyword{Parallel Programming}
