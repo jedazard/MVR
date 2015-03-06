@@ -40,7 +40,7 @@ See also below on how to cite the package with the R command: citation("MVR").
 =========================
 Documentation and Manual: 
 =========================
-All the codes are in the R folder and a manual (MVR.pdf) details the end-user (and internal) functions. At this stage and for simplicity, there are only 2 end-user function, 4 end-user diagnostic and plotting functions and 2 end-user datasets (synthetic and real). See the "MVR-package" introduction section of the manual for more details and examples of use.
+All the codes are in the R folder and a manual (MVR.pdf) details the end-user (and internal) functions. At this stage and for simplicity, there are only 2 end-user function, 4 end-user diagnostic and plotting functions and 2 end-user datasets (synthetic and real). See the "MVR-package" introduction section of the manual for more details and examples.
 
 =============
 Installation: 
