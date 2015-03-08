@@ -21,6 +21,7 @@
               in the R environment \cr}
     }
 }
+
 \details{
 The following describes all the end-user functions, and internal R subroutines 
 needed for running a complete MVR procedure. Other internal subroutines are not 
@@ -31,72 +32,69 @@ The R functions are categorized as follows:
 
 \enumerate{
 
-    \item{NEWS}
-
-\code{\link[MVR]{MVR.news}}
-\bold{Function to display the NEWS file of the \pkg{MVR} package.}
-
-    \item{END-USER REGULARIZATION & VARIANCE STABILIZATION FUNCTION}
-
+\item{END-USER REGULARIZATION & VARIANCE STABILIZATION FUNCTION} \cr
 \code{\link[MVR]{mvr}} (*) 
-\bold{Function for Mean-Variance Regularization and Variance Stabilization.} 
+\bold{Function for Mean-Variance Regularization and Variance Stabilization.} \cr
 End-user function for Mean-Variance Regularization (MVR) and Variance Stabilization 
 by similarity statistic under sample group homoscedasticity or heteroscedasticity assumption.
 The function takes advantage of the R package \pkg{parallel}, which allows users 
 to create a cluster of workstations on a local and/or remote machine(s), 
 enabling parallel execution of this function and scaling up with the number of CPU 
-cores available.
+cores available.\cr
               
-    \item{END-USER REGULARIZED TESTS-STATISTICS FUNCTIONS}
-
+\item{END-USER REGULARIZED TESTS-STATISTICS FUNCTIONS} \cr
 \code{\link[MVR]{mvrt.test}} (*)
-\bold{Function for Computing Mean-Variance Regularized T-test Statistic and Its Significance.}
+\bold{Function for Computing Mean-Variance Regularized T-test Statistic and Its Significance.}\cr
 End-user function for computing MVR t-test statistic and its significance (p-value) 
 under sample group homoscedasticity or heteroscedasticity assumption.
 The function takes advantage of the R package \pkg{parallel}, which allows users 
 to create a cluster of workstations on a local and/or remote machine(s), 
 enabling parallel execution of this function and scaling up with the number of CPU 
-cores available.
+cores available.\cr
 
-    \item{END-USER DIAGNOSTIC PLOTS FOR QUALITY CONTROL}
-
+\item{END-USER DIAGNOSTIC PLOTS FOR QUALITY CONTROL} \cr
 \code{\link[MVR]{cluster.diagnostic}}
-\bold{Function for Plotting Summary Cluster Diagnostic Plots.}
+\bold{Function for Plotting Summary Cluster Diagnostic Plots.}\cr
 Plot similarity statistic profiles and the optimal joint clustering configuration for the means and the variances by group.
 Plot quantile profiles of means and standard deviations by group and for each clustering configuration, to check that the distributions 
 of first and second moments of the MVR-transformed data approch their respective null distributions under the optimal configuration found, 
-assuming independence and normality of all the variables.
+assuming independence and normality of all the variables.\cr
 
 \code{\link[MVR]{target.diagnostic}}
-\bold{Function for Plotting Summary Target Moments Diagnostic Plots.}
+\bold{Function for Plotting Summary Target Moments Diagnostic Plots.}\cr
 Plot comparative distribution densities of means and standard deviations of the data before and after Mean-Variance Regularization
 to check for location shifts between observed first and second moments and their expected target values under a target centered homoscedastic model. 
 Plot comparative QQ scatterplots to look at departures between observed distributions of first and second moments of the MVR-transformed data
-and their theoretical distributions assuming independence and normality of all the variables.
+and their theoretical distributions assuming independence and normality of all the variables.\cr
 
 \code{\link[MVR]{stabilization.diagnostic}}
-\bold{Function for Plotting Summary Variance Stabilization Diagnostic Plots.}
-Plot comparative variance-mean plots to check the variance stabilization across variables before and after Mean-Variance Regularization.
+\bold{Function for Plotting Summary Variance Stabilization Diagnostic Plots.}\cr
+Plot comparative variance-mean plots to check the variance stabilization across variables before and after Mean-Variance Regularization.\cr
 
 \code{\link[MVR]{normalization.diagnostic}}
-\bold{Function for Plotting Summary Normalization Diagnostic Plots.}
+\bold{Function for Plotting Summary Normalization Diagnostic Plots.}\cr
 Plot comparative Box-Whisker and Heatmap plots of variables across samples check the effectiveness of normalization before and after 
-Mean-Variance Regularization.
+Mean-Variance Regularization.\cr
 
-    \item{END-USER DATASETS}
+\item{OTHER END-USER FUNCTIONS} \cr
+\code{\link[MVR]{MVR.news}}
+\bold{Display the \pkg{MVR} Package News}\cr
+Function to display the log file \code{NEWS} of updates of the \pkg{MVR} package.\cr
 
+\item{END-USER DATASETS} \cr
 A \code{Real} dataset coming from a quantitative proteomics experiment, consisting of \eqn{n=6} 
 samples split into a control ("\emph{M}") and a treated group ("\emph{S}") with \eqn{p=9052} 
 unique peptides or predictor variables. This is a balanced design with two sample groups (\eqn{G=2}), 
-under unequal sample group variance.
+under unequal sample group variance.\cr
 
 A \code{Synthetic} dataset with \eqn{n=10} observations (samples) and \eqn{p=200} variables, 
 where \eqn{nvar=40} of them are significantly different between the two sample groups.
-This is a balanced design with two sample groups (\eqn{G=2}), under unequal sample group variance.
+This is a balanced design with two sample groups (\eqn{G=2}), under unequal sample group variance.\cr
 }
 
-Known Bugs/Problems           :   None
+Known Bugs/Problems : None at this time.
 }
+
 \author{
     \itemize{
         \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
@@ -108,6 +106,7 @@ Known Bugs/Problems           :   None
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).
 }
+
 \references{
     \itemize{
         \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
@@ -116,6 +115,7 @@ Known Bugs/Problems           :   None
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }
+
 \seealso{
     \itemize{
         \item \code{makeCluster} (R package \pkg{parallel})
@@ -127,6 +127,7 @@ Known Bugs/Problems           :   None
         \item \code{bayesT} Hierarchical Bayesian Regularized t-test statistic \cite{Baldi et al., 2001}
     }
 }
+
 \keyword{High-Dimensional Data}
 \keyword{Mean-Variance Estimators}
 \keyword{Regularization}

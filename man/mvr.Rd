@@ -91,8 +91,20 @@
                      for standardization (cluster mean of pooled sample mean).}
     \item{scaling}{\code{numeric} \code{vector} of scaling values
                    for standardization (cluster mean of pooled sample std dev).}
-    \item{MVR}{\code{list} (of size the number of groups) containing all
-               \code{\link[MVR]{MeanVarReg}} values.}
+    \item{MVR}{\code{list} (of size the number of groups) containing for each group:
+        \itemize{
+            \item membership {\code{numeric} \code{vector} of cluster membership of each variable}
+            \item nc {Positive \code{integer} scalar of number of clusters found in optimal cluster configuration}
+            \item gap {\code{numeric} \code{vector} of the similarity statistic values}
+            \item sde {\code{numeric} \code{vector} of the standard errors of the similarity statistic values}
+            \item mu.std {\code{numeric} \code{matrix} (\code{K} x p) of the vector of standardized means by groups (rows), 
+                          where \code{K} = \#groups and \code{p} = \#variables}
+            \item sd.std {\code{numeric} \code{matrix} (\code{K} x p) of the vector of standardized standard deviations by groups (rows),
+                          where \code{K} = \#groups and \code{p} = \#variables}
+            \item mu.quant {\code{numeric} \code{matrix} (\code{nc.max} - \code{nc.min} + 1) x (length(\code{probs})) of quantiles of means}
+            \item sd.quant {\code{numeric} \code{matrix} (\code{nc.max} - \code{nc.min} + 1) x (length(\code{probs})) of quantiles of standard deviations}
+        }
+    }
     \item{block}{Value of argument \code{block}.}
     \item{tolog}{Value of argument \code{tolog}.}
     \item{nc.min}{Value of argument \code{nc.min}.}
