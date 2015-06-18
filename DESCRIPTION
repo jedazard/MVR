@@ -2,7 +2,7 @@ Package: MVR
 Type: Package
 Title: Mean-Variance Regularization
 Version: 1.30.0
-Date: 2015-03-08
+Date: 2015-06-18
 Authors@R: c(person("Jean-Eudes", "Dazard",
                     role = c("aut", "cre"),
                     email = "jxd101@case.edu"),
