@@ -3,15 +3,15 @@
 \alias{Synthetic}
 \title{Multi-Groups Synthetic Dataset}
 \description{
-    Generation of a synthetic dataset with \emph{n}=10 observations (samples) and \eqn{p=200} variables, 
-    where \eqn{nvar=40} of them are significantly different between the two sample groups.
+    Generation of a synthetic dataset with \emph{n}=10 observations (samples) and \eqn{p=100} variables, 
+    where \eqn{nvar=20} of them are significantly different between the two sample groups.
     
     This is a balanced design with two sample groups (\eqn{G=2}), under unequal sample group variance.
 }
 \usage{Synthetic}
 \format{
     A numeric matrix containing \eqn{n=10} observations (samples) by rows 
-    and \eqn{p=200} variables by columns, named \eqn{v_{1},...,v_{p}}.
+    and \eqn{p=100} variables by columns, named \eqn{v_{1},...,v_{p}}.
     Samples are balanced (\eqn{n_{1}=5},\eqn{n_{2}=5}) between the two groups (\eqn{G_{1}, G_{2}}).
     Compressed Rda data file.
 }

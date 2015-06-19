@@ -177,7 +177,7 @@ library("MVR")
 # Without cluster usage
 #===================================================
 nc.min <- 1
-nc.max <- 20
+nc.max <- 10
 probs <- seq(0, 1, 0.01)
 n <- 10
 mvr.obj <- mvr(data = Synthetic,

@@ -87,8 +87,8 @@ samples split into a control ("\emph{M}") and a treated group ("\emph{S}") with 
 unique peptides or predictor variables. This is a balanced design with two sample groups (\eqn{G=2}), 
 under unequal sample group variance.\cr
 
-A \code{Synthetic} dataset with \eqn{n=10} observations (samples) and \eqn{p=200} variables, 
-where \eqn{nvar=40} of them are significantly different between the two sample groups.
+A \code{Synthetic} dataset with \eqn{n=10} observations (samples) and \eqn{p=100} variables, 
+where \eqn{nvar=20} of them are significantly different between the two sample groups.
 This is a balanced design with two sample groups (\eqn{G=2}), under unequal sample group variance.\cr
 }
 

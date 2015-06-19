@@ -182,7 +182,7 @@ library("MVR")
 # Without cluster usage
 #================================================
 nc.min <- 1
-nc.max <- 20
+nc.max <- 10
 probs <- seq(0, 1, 0.01)
 n <- 10
 GF <- factor(gl(n = 2, k = n/2, len = n), 
