@@ -4,18 +4,6 @@ titl <- paste(meta$Package, ":", meta$Title, sep=" ")
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
 vers <- paste("R package version", meta$Version)
 
-citEntry(entry       = "Manual",
-         title       = titl,
-         author      = personList(person(family="Dazard", given="J-E."),
-                                  person(family="Xu", given="H."),
-                                  person(family="Santana", given="A.")), 	 	
-         publisher   = "CRAN",
-         year        = year,
-         note        = vers,
-         url         = "http://cran.r-project.org/web/packages/MVR/",
-         pdf         = "http://cran.r-project.org/web/packages/MVR/MVR.pdf",
-         textVersion = paste("Dazard J-E., Xu H. and Santana A. (", year ,"). ", titl, ", ", vers, ".", sep=""))
-
 citEntry(entry       = "Article",
          title       = "Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data",
          author      = personList(person(family="Dazard", given="J-E."),

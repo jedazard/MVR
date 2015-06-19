@@ -17,8 +17,8 @@ o RELEASE 1.20.0
 - Now supports SOCKET, PVM and MPI clusters. Manual corrected accordingly.
 - Minor updates in the email addresses and references.
 ---------------------------------------------------------------------------------
-Date   : 2015-06-18
-o RELEASE 1.30.0
+Date   : 2015-06-19
+o RELEASE 1.30.1
 - Packages in 'Depends' field of the DESCRIPTION file are now imported from the NAMESPACE file.
 - Compiled C code now uses the interface to R internal RNGs routines instead of the system rand RNG.
 - Compiled C code now successfully passes Valgrind memory check. 
