@@ -15,21 +15,18 @@
 ################
 # Description   :
 ################
-#                   Internal function called by mvr() and mvrt.test() to represent the empty
-#                   array, matrix, or vector of zero dimension or length.
-#                   Often returned by expressions and functions whose value is undefined.
 #
 ################
 # Arguments     :
 ################
-# x             :   Array, matrix or vector of any type
 #
 ################
 # Values        :
 ################
-#               :   Logical. Returns TRUE if its argument is empty and FALSE otherwise.
 #
 ################
+#
+##########################################################################################################################################
 
 is.empty <- function(x) {
     if (is.vector(x)) {
@@ -58,23 +55,18 @@ is.empty <- function(x) {
 ################
 # Description   :
 ################
-#                   Internal function called by mvrt.test() to validate the bootstrap set of indices if a bootstrap test
-#                   is undertaken in the mvrt.test() function.
-#                   Check that indices are unique per sample group.
 #
 ################
 # Arguments     :
 ################
-# x             :   Vector of bootstrap set of indices
-# ng            :   Number of sample groups in original data
-# def           :   List of samples indices per sample group in original data
 #
 ################
 # Values        :
 ################
-# ok            :   Logical, returns TRUE if valid and FALSE otherwise.
 #
 ################
+#
+##########################################################################################################################################
 
 is.valid <- function(x, def, ng) {
     ok <- TRUE
@@ -98,22 +90,16 @@ is.valid <- function(x, def, ng) {
 ################
 # Description   :
 ################
-#                   Pooled group sample standard deviation
 #
 ################
 # Arguments     :
 ################
-# x             :   Numeric vector or matrix with variables in columns
-# block         :   Vector or factor grouping/blocking variable.
-#                   Must Have length equal to the sample size.
-#                   All group sample sizes must be > 1.
 #
 ################
 # Values        :
 ################
-#               :   Vector of size the dimensionality where each entry is the variable-wise pooled group sample standard deviation
 #
-################
+##########################################################################################################################################
 
 pooled.sd <- function(x, block) {
     if (!is.numeric(x) && !is(x, "vector") && !is(x, "matrix") && !is(x, "data.frame"))
@@ -174,22 +160,16 @@ pooled.sd <- function(x, block) {
 ################
 # Description   :
 ################
-#                   Pooled group sample mean
 #
 ################
 # Arguments     :
 ################
-# x             :   Numeric vector or matrix with variables in columns
-# block         :   Vector or factor grouping/blocking variable.
-#                   Must Have length equal to the sample size.
-#                   All group sample sizes must be > 1.
 #
 ################
 # Values        :
 ################
-#               :   Vector of size the dimensionality where each entry is the variable-wise pooled group sample mean
 #
-################
+##########################################################################################################################################
 
 pooled.mean <- function(x, block) {
     if (!is.numeric(x) && !is(x, "vector") && !is(x, "matrix") && !is(x, "data.frame"))
@@ -248,39 +228,16 @@ pooled.mean <- function(x, block) {
 ################
 # Description   :
 ################
-#                   Core subroutine of mvr() and mvrt.test() functions.
-#                   Returns optimal cluster configuration and quantiles of means and standard deviations
-#                   for each cluter configuration when needed.
 #
 ################
 # Arguments     :
 ################
-# data          :   Numeric matrix of untransformed (raw) data, where samples are by rows and variables (to be clustered) are by columns.
-# nc.min        :   Minimum number of clusters
-# nc.max        :   Maximum number of clusters
-# probs         :   Numeric vector of probabilities for quantile diagnostic plots.
-# B             :   Number of Monte Carlo replicates of the inner loop of the sim statistic function
-# parallel      :   Is parallel computing to be performed? Optional, defaults to FALSE.
-# conf          :   List of parameters for cluster configuration.
-#                   Inputs for R package parallel function makeCluster() for cluster setup.
-#                   Optional, defaults to NULL. See details for usage.
-# verbose       :   Is the output to be verbose?
 #
 ################
 # Values        :
 ################
-# membership    :   Vector of cluster membership for each variable
-# nc            :   Number of clusters found in optimal cluster configuration
-# gap           :   Similarity statistic values
-# sde           :   Standard errors of the similarity statistic values
-# mu.std        :   Numeric matrix (K x p) of the vector of standardized means by groups (rows),
-#                   where K = #groups and p = #variables.
-# sd.std        :   Numeric matrix (K x p) of the vector of standardized standard deviations by groups (rows),
-#                   where K = #groups and p = #variables.
-# mu.quant      :   Numeric matrix (nc.max - nc.min + 1) x (length(probs)) of quantiles of means.
-# sd.quant      :   Numeric matrix (nc.max - nc.min + 1) x (length(probs)) of quantiles of standard deviations.
 #
-################
+##########################################################################################################################################
 
 MeanVarReg <- function(data, nc.min, nc.max, probs, B, parallel, conf, verbose) {
     data <- t(data)                             # transpose matrix for compatibility with clustering functions
@@ -338,27 +295,16 @@ MeanVarReg <- function(data, nc.min, nc.max, probs, B, parallel, conf, verbose) 
 ################
 # Description   :
 ################
-#                   Wrapper Subroutine Around C Subroutine for 'K-means' Clustering Algorithm.
-#                   Perform "K-means" clustering on a data matrix.
-#                   Internal subroutine of sim.dis(), and MeanVarReg().
 #
 ################
 # Arguments     :
 ################
-# data          :   Numeric matrix of data where variables are by columns and samples to cluster are by rows.
-# k             :   Integer of number of centroids to start with.
-# ns            :   How many random seedings should be done.
-# maxiter       :   Integer of maximum number of iterations in 'K-means' clustering algorithm (convergence criteria).
 #
 ################
 # Values        :
 ################
-# lWk           :   Log-transformed within cluster dispersion statistic
-# centers       :   Cluster centers
-# membership    :   Cluster membership of each observation
-# obj           :   object of class "kmeans" as returned by kmeans()
 #
-################
+##########################################################################################################################################
 
 km.clustering <- function(data, k, ns, maxiter) {
     data <- as.matrix(data)
@@ -423,26 +369,16 @@ km.clustering <- function(data, k, ns, maxiter) {
 ################
 # Description   :
 ################
-#                   Within-Cluster Sum of Squares Distances Subroutine.
-#                   Wrapping subroutine around internal C subroutine for returning Monte-Carlo replicates
-#                   of within-cluster sum of squares distances for a given number of clusters and
-#                   under a standard Gaussian reference distribution.
-#                   Internal subroutine of sim.dis().
 #
 ################
 # Arguments     :
 ################
-# n             :   Number of rows of data matrix (where points to cluster are by rows (usually samples)).
-# p             :   Number of coluns of data matrix (where variables are by column).
-# k             :   Fixed number of clusters
-# B             :   Number of Monte Carlo replicates
 #
 ################
 # Values        :
 ################
-# lWk.mc        :   Numeric B-vector of Monte Carlo replicates of within-cluster sum of squares.
 #
-################
+##########################################################################################################################################
 
 withinsumsq <- function(n, p, B, k) {
     W <- .C("MVR_withinsumsq", as.integer(n),
@@ -478,31 +414,16 @@ withinsumsq <- function(n, p, B, k) {
 ################
 # Description   :
 ################
-#                   Internal similarity statistic function called by MeanVarReg()
-#                   for estimating similarity statistic with sampling variability
-#                   under a standard Gaussian reference distibution.
 #
 ################
 # Arguments     :
 ################
-# data          :   Standardized numeric matrix of data, where points to cluster are by rows (usually samples),
-#                   or an object that can be coerced to such a matrix (such as a numeric vector or a data frame with all numeric columns).
-#                   Missing values are not allowed. NaN or Inf are neither allowed.
-# k             :   Fixed number of clusters
-# B             :   Number of Monte Carlo replicates of the inner loop of the gap statistic function.
-# parallel      :   Is parallel computing to be performed? Optional, defaults to FALSE.
-# conf          :   List of parameters for cluster configuration.
-#                   Inputs for R package parallel function makeCluster() for cluster setup.
-#                   Optional, defaults to NULL. See details for usage.
-# verbose       :   Is the output to be verbose?
 #
 ################
 # Values        :
 ################
-# gapk          :   Similarity statistic value
-# sk            :   Standard error of the similarity statistic value
 #
-################
+##########################################################################################################################################
 
 sim.dis <- function(data, k, B, parallel, conf, verbose) {
     if (nrow(data) < ncol(data)) data <- t(data)
@@ -553,21 +474,16 @@ sim.dis <- function(data, k, B, parallel, conf, verbose) {
 ################
 # Description   :
 ################
-#                   Internal merging function of variable cluster configurations determined for each group.
-#                   Called by mvr(). Takes as argument the cluster membership matrix for each variable by group.
 #
 ################
 # Arguments     :
 ################
-# M             :   Cluster membership matrix for each variable by group, where variables are by rows, and groups by columns
-#                   Returned by MeanVarReg()$membership.
 #
 ################
 # Values        :
 ################
-# clus          :   Merged clustering configuration
 #
-################
+##########################################################################################################################################
 
 merging.cluster <- function(M) {
     ord <- order(M[, 1, drop=TRUE], decreasing=FALSE)
@@ -609,31 +525,16 @@ merging.cluster <- function(M) {
 ################
 # Description   :
 ################
-#                   Internal function called by mvrt.test() for computing the regularized test-statistic
 #
 ################
 # Arguments     :
 ################
-# x             :   Input matrix with variables in columns
-# obj           :   Object of class "mvr" as returned by mvr().
-# lev           :   Levels of the group/blocking factor used in mvrt.test()
-# tab           :   Number of samples per group
-# ng            :   Number of sample groups
-# def           :   List of samples indices per sample group
-# nc.min        :   Minimum number of clusters
-# nc.max        :   Maximum number of clusters
-# parallel      :   Is parallel computing to be performed? Optional, defaults to FALSE.
-# conf          :   List of parameters for cluster configuration.
-#                   Inputs for R package parallel function makeCluster() for cluster setup.
-#                   Optional, defaults to NULL. See details for usage.
-# verbose       :   Is the output to be verbose?
 #
 ################
 # Values        :
 ################
-# t.reg         :   Vector of test-statistic values
 #
-################
+##########################################################################################################################################
 
 mvrt <- function(x, obj, lev, tab, ng, def, nc.min, nc.max, parallel, conf, verbose) {
     p <- ncol(x)
@@ -684,18 +585,14 @@ mvrt <- function(x, obj, lev, tab, ng, def, nc.min, nc.max, parallel, conf, verb
 ################
 # Description   :
 ################
-#                   Startup initializations
 #
 ################
 # Arguments     :
 ################
-# libname       :   Library name
-# pkgname       :   Package name
 #
 ################
 # Values        :
 ################
-#               :   None
 #
 ##########################################################################################################################################
 
@@ -706,8 +603,3 @@ mvrt <- function(x, obj, lev, tab, ng, def, nc.min, nc.max, parallel, conf, verb
     packageStartupMessage("Type MVR.news() to see new features, changes, and bug fixes\n")
 }
 ##########################################################################################################################################
-
-
-
-
-

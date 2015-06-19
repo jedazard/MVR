@@ -15,48 +15,18 @@
 ################
 # Description   :
 ################
-#                   Mean-Variance Regularization (MVR) and Variance Stabilization function by similarity statistic
-#                   under sample group homoscedasticity or heteroscedasticity assumption.
-#                   Return an object of class "mvr".
 #
 ################
 # Arguments     :
 ################
-# data          :   Numeric matrix of untransformed (raw) data, where samples are by rows and variables (to be clustered) are by columns,
-#                   or an object that can be coerced to such a matrix (such as a numeric vector or a data frame with all numeric columns).
-#                   Missing values (NA), NotANumber values (NaN) or Infinite values (Inf) are not allowed.
-# block         :   Vector or factor group/blocking variable.
-#                   Must Have length equal to the sample size.
-#                   All group sample sizes must be > 1.
-#                   Defaults to single group situation i.e. to the assumption of equal variance between groups.
-# tolog         :   Is the data to be log2-transformed first? Optional, defaults to FALSE.
-#                   Negative or null values will be changed to 1 before taking log2-transformation.
-# nc.min        :   Minimum # of entertained clusters, defaults to  1
-# nc.max        :   Maximum # of entertained clusters, defaults to 30
-# probs         :   Numeric vector of probabilities for quantile diagnostic plots. Defaults to seq(0, 1, 0.01).
-# B             :   Number of Monte Carlo replicates of the inner loop of the sim statistic function.
-# parallel      :   Is parallel computing to be performed? Optional, defaults to FALSE.
-# conf          :   List of parameters for cluster configuration.
-#                   Inputs for R package parallel function makeCluster() for cluster setup.
-#                   Optional, defaults to NULL. See details for usage.
-# verbose       :   Is the output to be verbose? (defaults to TRUE).
 #
 ################
 # Values        :
 ################
-#               :   Object of class "mvr", containing the following:
-# Xraw          :   Numeric matrix of original data
-# Xmvr          :   Numeric matrix of MVR-transformed/standardized data
-# centering     :   Numeric vector of centering values for standardization (cluster mean of pooled sample mean)
-# scaling       :   Numeric vector of scaling values for standardization (cluster mean of pooled sample std dev)
-# MVR           :   List (of size #groups) containing "MeanVarReg" values
-# block         :   Value of argumemt "block"
-# tolog         :   Value of argumemt "tolog"
-# nc.min        :   Value of argumemt "nc.min"
-# nc.max        :   Value of argumemt "nc.max"
-# probs         :   Value of argumemt "probs"
 #
 ################
+#
+##########################################################################################################################################
 
 mvr <- function(data, block=rep(1,nrow(data)), tolog=FALSE, nc.min=1, nc.max=30, probs=seq(0, 1, 0.01), B=100, parallel=FALSE, conf=NULL, verbose=TRUE) {
     if (any(table(block) == 1))
@@ -122,45 +92,18 @@ mvr <- function(data, block=rep(1,nrow(data)), tolog=FALSE, nc.min=1, nc.max=30,
 ################
 # Description   :
 ################
-#                   Computes Mean-Variance Regularized t-test statistic and its significance (p-value)
-#                   under sample group homoscedasticity or heteroscedasticity assumption.
-#                   Return an object of class "mvrt.test".
 #
 ################
 # Arguments     :
 ################
-# data          :   Numeric matrix of untransformed (raw) data, where samples are by rows and variables (to be clustered) are by columns,
-#                   or an object that can be coerced to such a matrix (such as a numeric vector or a data frame with all numeric columns).
-#                   Missing values (NA), NotANumber values (NaN) or Infinite values (Inf) are not allowed.
-# obj           :   mvr object returned by mvr(). Defaults to NULL.
-# block         :   Vector or factor group/blocking variable.
-#                   Number of sample groups must be >= 2.
-#                   All group sample sizes must be > 1.
-# tolog         :   Is the data to be log2-transformed first? Optional, defaults to FALSE.
-#                   Negative or null values will be changed to 1 before taking log2-transformation.
-# nc.min        :   Minimum # of entertained clusters, defaults to  1
-# nc.max        :   Maximum # of entertained clusters, defaults to 30
-# pval          :   Shall p-values be computed? If not, n.resamp and replace will be ignored.
-#                   If FALSE (default), t-statistic only will be computed,
-#                   If TRUE, exact (permutation test) or approximate (bootstrap test) p-values be computed.
-# replace       :   Shall permutation test (default) or bootstrap test be computed?
-#                   If FALSE (default), permutation test will be computed with null permutation distribution,
-#                   If TRUE, bootstrap test will be computed with null bootstrap distribution.
-# n.resamp      :   Number of resamplings (default=100) to compute (by permutation or bootstsrap).
-# parallel      :   Is parallel computing to be performed? Optional, defaults to FALSE.
-# conf          :   List of parameters for cluster configuration.
-#                   Inputs for R package parallel function makeCluster() for cluster setup.
-#                   Optional, defaults to NULL. See details for usage.
-# verbose       :   Is the output to be verbose? (defaults to TRUE).
 #
 ################
 # Values        :
 ################
-#               :   Object of class "mvrt.test", containing the following:
-# statistic     :   Vector of test-statistic values
-# p.value       :   Vector of p-values if requested, otherwise NULL value
 #
 ################
+#
+##########################################################################################################################################
 
 mvrt.test <- function(data, obj=NULL, block, tolog=FALSE, nc.min=1, nc.max=30, pval=FALSE, replace=FALSE, n.resamp=100, parallel=FALSE, conf=NULL, verbose=TRUE) {
 
@@ -291,32 +234,18 @@ mvrt.test <- function(data, obj=NULL, block, tolog=FALSE, nc.min=1, nc.max=30, p
 ################
 # Description   :
 ################
-#                   Function for Plotting Summary Cluster Diagnostic Plots.
 #
 ################
 # Arguments     :
 ################
-# obj           :   Object of class "mvr" as returned by mvr().
-# title         :   Title of the plot. Defaults to the empty string.
-# span          :   Span parameter of the loess() function, which controls the degree of smoothing. Defaults to 0.75.
-# degree        :   Degree parameter of the loess() function, which controls the degree of the polynomials to be used. Defaults to 2.
-#                   (Normally 1 or 2. Degree 0 is also allowed, but see the ‘Note’ in loess {stats} package.)
-# family        :   Family used for local fittin in {"gaussian", "symmetric"} of the loess() function.
-#                   If "gaussian" fitting is by least-squares, and if "symmetric" a re-descending M estimator is used with Tukey's biweight function.
-# device        :   Display device in {NULL, "PS", "PDF"}. Defaults to NULL (standard output screen).
-#                   Currently implemented display device are "PS" (Postscript) or "PDF" (Portable Document Format).
-# file          :   File name for outputting display device. Defaults to "Cluster Diagnostic Plots".
-# path          :   Absolute path (without final (back)slash separator). Defaults to working directory path.
-# horizontal    :   Orientation of the printed image, a logical. Defaults to FALSE, that is potrait orientation.
-# width         :   Width of the graphics region in inches. Defaults to 8.5.
-# height        :   Height of the graphics region in inches. Defaults to 11.
-# ...           :   Generic arguments passed to other plotting functions.
 #
 ################
 # Values        :
 ################
 #
 ################
+#
+##########################################################################################################################################
 
 cluster.diagnostic <- function(obj,
                                span=0.75,
@@ -434,27 +363,18 @@ cluster.diagnostic <- function(obj,
 ################
 # Description   :
 ################
-#                   Function for Plotting Summary Target Moments Diagnostic Plots.
 #
 ################
 # Arguments     :
 ################
-# obj           :   Object of class "mvr" as returned by mvr().
-# title         :   Title of the plot. Defaults to the empty string.
-# device        :   Display device in {NULL, "PS", "PDF"}. Defaults to NULL (standard output screen).
-#                   Currently implemented display device are "PS" (Postscript) or "PDF" (Portable Document Format).
-# file          :   File name for outputting display device. Defaults to "Target Moments Diagnostic Plots".
-# path          :   Absolute path (without final (back)slash separator). Defaults to working directory path.
-# horizontal    :   Orientation of the printed image, a logical. Defaults to FALSE, that is potrait orientation.
-# width         :   Width of the graphics region in inches. Defaults to 8.5.
-# height        :   Height of the graphics region in inches. Defaults to 6.5.
-# ...           :   Generic arguments passed to other plotting functions.
 #
 ################
 # Values        :
 ################
 #
 ################
+#
+##########################################################################################################################################
 
 target.diagnostic <- function(obj,
                               title="",
@@ -597,32 +517,18 @@ target.diagnostic <- function(obj,
 ################
 # Description   :
 ################
-#                   Function for Plotting Summary Variance Stabilization Diagnostic Plots.
 #
 ################
 # Arguments     :
 ################
-# obj           :   Object of class "mvr" as returned by mvr().
-# title         :   Title of the plot. Defaults to the empty string.
-# span          :   Span parameter of the loess() function, which controls the degree of smoothing. Defaults to 0.5.
-# degree        :   Degree parameter of the loess() function, which controls the degree of the polynomials to be used. Defaults to 2.
-#                   (Normally 1 or 2. Degree 0 is also allowed, but see the ‘Note’ in loess {stats} package.)
-# family        :   Family used for local fittin in {"gaussian", "symmetric"} of the loess() function.
-#                   If "gaussian" fitting is by least-squares, and if "symmetric" a re-descending M estimator is used with Tukey's biweight function.
-# device        :   Display device in {NULL, "PS", "PDF"}. Defaults to NULL (standard output screen).
-#                   Currently implemented display device are "PS" (Postscript) or "PDF" (Portable Document Format).
-# file          :   File name for outputting display device. Defaults to "Stabilization Diagnostic Plots".
-# path          :   Absolute path (without final (back)slash separator). Defaults to working directory path.
-# horizontal    :   Orientation of the printed image, a logical. Defaults to FALSE, that is potrait orientation.
-# width         :   Width of the graphics region in inches. Defaults to 7.
-# height        :   Height of the graphics region in inches. Defaults to 5.
-# ...           :   Generic arguments passed to other plotting functions.
 #
 ################
 # Values        :
 ################
 #
 ################
+#
+##########################################################################################################################################
 
 stabilization.diagnostic <- function(obj,
                                      span=0.5,
@@ -710,28 +616,18 @@ stabilization.diagnostic <- function(obj,
 ################
 # Description   :
 ################
-#                   Function for Plotting Summary Normalization Diagnostic Plots.
 #
 ################
 # Arguments     :
 ################
-# obj           :   Object of class "mvr" as returned by mvr().
-# title         :   Title of the plot. Defaults to the empty string.
-# pal           :   Color palette.
-# device        :   Display device in {NULL, "PS", "PDF"}. Defaults to NULL (standard output screen).
-#                   Currently implemented display device are "PS" (Postscript) or "PDF" (Portable Document Format).
-# file          :   File name for outputting display device. Defaults to "Normalization Diagnostic Plots".
-# path          :   Absolute path (without final (back)slash separator). Defaults to working directory path.
-# horizontal    :   Orientation of the printed image, a logical. Defaults to FALSE, that is potrait orientation.
-# width         :   Width of the graphics region in inches. Defaults to 7.
-# height        :   Height of the graphics region in inches. Defaults to 8.
-# ...           :   Generic arguments passed to other plotting functions.
 #
 ################
 # Values        :
 ################
 #
 ################
+#
+##########################################################################################################################################
 
 normalization.diagnostic <- function(obj,
                                      pal,
@@ -833,17 +729,14 @@ normalization.diagnostic <- function(obj,
 ################
 # Description   :
 ################
-#                   Function to display the log file of updates of the MVR package.
 #
 ################
 # Arguments     :
 ################
-# ...               Further arguments passed to or from other methods.
 #
 ################
 # Values        :
 ################
-#                   None.
 #
 ##########################################################################################################################################
 
