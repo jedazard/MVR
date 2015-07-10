@@ -8,4 +8,8 @@ export(MVR.news,
        stabilization.diagnostic,
        normalization.diagnostic)
 
-import(parallel, statmod)
+import("parallel", "statmod")
+import("graphics")
+import("grDevices")
+import("methods")
+import("stats")
