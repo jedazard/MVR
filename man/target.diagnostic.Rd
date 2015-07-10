@@ -14,7 +14,7 @@
 
 \usage{
     target.diagnostic(obj, 
-                      title = "",
+                      title = "Target Moments Diagnostic Plots",
                       device = NULL, 
                       file = "Target Moments Diagnostic Plots",
                       path = getwd(),
@@ -25,7 +25,7 @@
 
 \arguments{
   \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
-  \item{title}{Title of the plot. Defaults to the empty string.}
+  \item{title}{Title of the plot. Defaults to "Target Moments Diagnostic Plots".}
   \item{device}{Graphic display device in \{NULL, "PS", "PDF"\}. Defaults to NULL (standard output screen).
                 Currently implemented graphic display devices are "PS" (Postscript) or "PDF" (Portable Document Format).}
   \item{file}{File name for output graphic. Defaults to "Target Moments Diagnostic Plots".}

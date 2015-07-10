@@ -17,7 +17,7 @@
                        span = 0.75, 
                        degree = 2, 
                        family = "gaussian", 
-                       title = "", 
+                       title = "Cluster Diagnostic Plots", 
                        device = NULL, 
                        file = "Cluster Diagnostic Plots",
                        path = getwd(),
@@ -28,7 +28,7 @@
 
 \arguments{
   \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
-  \item{title}{Title of the plot. Defaults to the empty string.}
+  \item{title}{Title of the plot. Defaults to "Cluster Diagnostic Plots".}
   \item{span}{Span parameter of the \code{loess()} function (R package \pkg{stats}), which controls the degree of smoothing. 
               Defaults to 0.75.}
   \item{degree}{Degree parameter of the \code{loess()} function (R package \pkg{stats}), which controls the degree of the polynomials to be used. 

@@ -12,7 +12,7 @@
 \usage{
     normalization.diagnostic(obj, 
                              pal,
-                             title = "",
+                             title = "Normalization Diagnostic Plots",
                              device = NULL, 
                              file = "Normalization Diagnostic Plots",
                              path = getwd(),
@@ -23,7 +23,7 @@
 
 \arguments{
   \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
-  \item{title}{Title of the plot. Defaults to the empty string.}
+  \item{title}{Title of the plot. Defaults to "Normalization Diagnostic Plots".}
   \item{pal}{Color palette.}
   \item{device}{Graphic display device in \{NULL, "PS", "PDF"\}. Defaults to NULL (standard output screen).
                 Currently implemented graphic display devices are "PS" (Postscript) or "PDF" (Portable Document Format).}
