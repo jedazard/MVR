@@ -29,5 +29,16 @@ o RELEASE 1.30.1
 - Removed internal functions from the manual, updated manual, version number.
 - Test build under 3.0.2 and release update to GitHub.
 ---------------------------------------------------------------------------------
+Date   : 2015-07-10
+o RELEASE 1.30.2
+- Compliance with new R CMD check, which now checks code usage via 'codetools'.
+  Functions and packages from default packages other than base which are used in the package
+  code are not imported via the package namespace file (NAMESPACE).
+  Added new field 'Imports' in the package description file (DESCRIPTION) 
+  to match the functions and packages newly imported via NAMESPACE.
+- Minor updates of the default title values in the diagnostic plots. 
+- Built under R-3.2.1 (2015-06-19) and tested under R-devel (2015-07-08 r68642). 
+- Release update to GitHub.
+---------------------------------------------------------------------------------
 
 
