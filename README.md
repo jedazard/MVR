@@ -45,17 +45,15 @@ All the codes are in the R folder and a manual (MVR.pdf) details the end-user (a
 =============
 Installation: 
 =============
-MVR 1.30.1 was built under R version 3.0.2 (2013-09-25).
-Installation has been tested on Windows, Linux and Mac platforms.
-To install the current software, download the version from the CRAN repository:
+MVR 1.30.2 requires R-3.0.2 (2013-09-25).
+It was built under R-3.2.1 (2015-06-19) and tested under R-devel (2015-07-08 r68642).
+Installation has been tested on Windows, Linux and OSX platforms.
 
-http://cran.r-project.org/web/packages/MVR/index.html
+To install MVR from CRAN, download and install the current version from the CRAN repository:
+install.packages("MVR")
 
-
-To install the developmental version 1.30.1, simply type:
-
+Or, you can install the development version from GitHub, using devtools:
 library(devtools)
-
 devtools::install_github("jedazard/MVR")
 
 =============
@@ -64,9 +62,7 @@ Usage:
 To load the MVR library in an R session and start using it:
 
 library("MVR")
-
 MVR.news()
-
 citation("MVR")
 
 etc...
