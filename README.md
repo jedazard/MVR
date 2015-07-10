@@ -50,10 +50,13 @@ It was built under R-3.2.1 (2015-06-19) and tested under R-devel (2015-07-08 r68
 Installation has been tested on Windows, Linux and OSX platforms.
 
 To install MVR from CRAN, download and install the current version from the CRAN repository:
+
 install.packages("MVR")
 
 Or, you can install the development version from GitHub, using devtools:
+
 library(devtools)
+
 devtools::install_github("jedazard/MVR")
 
 =============
@@ -62,7 +65,9 @@ Usage:
 To load the MVR library in an R session and start using it:
 
 library("MVR")
+
 MVR.news()
+
 citation("MVR")
 
 etc...
