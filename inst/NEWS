@@ -33,7 +33,7 @@ Date   : 2015-07-10
 o RELEASE 1.30.2
 - Compliance with new R CMD check, which now checks code usage via 'codetools'.
   Functions and packages from default packages other than base which are used in the package
-  code are not imported via the package namespace file (NAMESPACE).
+  code are now imported via the package namespace file (NAMESPACE).
   Added new field 'Imports' in the package description file (DESCRIPTION) 
   to match the functions and packages newly imported via NAMESPACE.
 - Minor updates of the default title values in the diagnostic plots. 
