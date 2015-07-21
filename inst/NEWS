@@ -40,5 +40,11 @@ o RELEASE 1.30.2
 - Built under R-3.2.1 (2015-06-19) and tested under R-devel (2015-07-08 r68642). 
 - Release update to GitHub.
 ---------------------------------------------------------------------------------
+Date   : 2015-07-21
+o RELEASE 1.30.3
+- Added manual in a 'doc' subfolder within 'inst' folder.
+- Built and tested under R-devel (2015-07-20 r68705). 
+- Release update to GitHub.
+---------------------------------------------------------------------------------
 
 
