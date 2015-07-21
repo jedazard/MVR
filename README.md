@@ -45,15 +45,15 @@ All the codes are in the R folder and a manual (MVR.pdf) details the end-user (a
 =============
 Installation: 
 =============
-MVR 1.30.2 requires R-3.0.2 (2013-09-25).
-It was built under R-3.2.1 (2015-06-19) and tested under R-devel (2015-07-08 r68642).
+MVR 1.30.3 requires R-3.0.2 (2013-09-25).
+It was built and tested under R-devel (2015-07-20 r68705).
 Installation has been tested on Windows, Linux and OSX platforms.
 
-To install MVR from CRAN, download and install the current version from the CRAN repository:
+To install MVR from CRAN, download and install the current version (1.30.2) from the CRAN repository:
 
 install.packages("MVR")
 
-Or, you can install the development version from GitHub, using devtools:
+Or, you can install the development version (1.30.3) from GitHub, using devtools:
 
 library(devtools)
 
