@@ -53,7 +53,7 @@ https://www.amstat.org/membersonly/proceedings/2010/papers/309104_62376.pdf
 =============
 Requirements:
 =============
-MVR 1.30.3 requires R-3.0.2 (2013-09-25). It was built and tested under R-devel (2015-07-20 r68705). 
+MVR 1.30.3 requires R-3.0.2 (2013-09-25). It was built and tested under R-devel (2015-07-20 r68705) and Travis CI. 
 
 Installation has been tested on Windows, Linux and OSX platforms. See for instance the 'CRAN Package Check Results' here:
 
