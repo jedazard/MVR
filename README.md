@@ -68,6 +68,8 @@ install.packages("MVR")
 
 - Or, you can install the development version (1.30.3) from GitHub, using devtools:
 
+install.packages(devtools)
+
 library(devtools)
 
 devtools::install_github("jedazard/MVR")
