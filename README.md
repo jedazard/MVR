@@ -1,11 +1,17 @@
 #### General Remarks
 
 Grand-total number of downloads since October of 2012, the month the
-[RStudio CRAN mirror](http://cran-logs.rstudio.com/) started publishing logs: ![](http://cranlogs.r-pkg.org/badges/grand-total/MVR) 
- 
-Number of downloads last month: ![](http://cranlogs.r-pkg.org/badges/MVR) 
+[RStudio CRAN mirror](http://cran-logs.rstudio.com/) started publishing logs: 
 
-Travis CI build result: ![](https://travis-ci.org/jedazard/MVR.svg)
+![](http://cranlogs.r-pkg.org/badges/grand-total/MVR) 
+ 
+Number of downloads last month: 
+
+![](http://cranlogs.r-pkg.org/badges/MVR) 
+
+Travis CI build result: 
+
+![](https://travis-ci.org/jedazard/MVR.svg)
 
 ============
 Description:
