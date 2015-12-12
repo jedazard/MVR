@@ -56,10 +56,10 @@ Open access to companion papers (accepted for publication):
 The Official Journal of the International Association for Statistical Computing.
 
 - [JSM (2011)](https://www.amstat.org/membersonly/proceedings/2011/papers/302266_68145.pdf). 
-The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver).
+The ASA Proceedings of the annual Joint Statistical Meetings (Miami, FL, USA).
 
 - [JSM (2010)](https://www.amstat.org/membersonly/proceedings/2010/papers/309104_62376.pdf). 
-The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver).
+The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver, BC, Canada).
 
 =============
 Requirements:
