@@ -37,7 +37,8 @@ See also below the package news with the R command: MVR.news().
 ========
 License:
 ========
-MVR is Open Source / Free Software, and is freely available under the GNU General Public License, version 3.
+MVR is Open Source / Free Software, available under the GNU General Public License, version 3. 
+See details [here](https://github.com/jedazard/MVR/blob/master/LICENSE).
 
 =========================
 Documentation and Manual: 
@@ -47,32 +48,26 @@ All the codes are in the R folder and a manual (MVR.pdf) details the end-user (a
 ==========
 References
 ==========
-CRAN release:
-https://cran.r-project.org/web/packages/MVR/index.html
+[CRAN release (2011-07-26)](https://cran.r-project.org/web/packages/MVR/index.html) with change log [here](https://cran.r-project.org/web/packages/MVR/NEWS).
 
+Open access to companion papers (accepted for publication):
 
-The companion papers can be accessed here:
+- [Comput. Statist. Data Anal. (2012)](http://www.sciencedirect.com/science/article/pii/S0167947312000321).
+The Official Journal of the International Association for Statistical Computing.
 
-- Comput. Statist. Data Anal. (2012):
+- [JSM (2011)](https://www.amstat.org/membersonly/proceedings/2011/papers/302266_68145.pdf). 
+The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver).
 
-http://www.sciencedirect.com/science/article/pii/S0167947312000321
-
-- ASA-IMS JSM Proceedings (2011): 
-
-https://www.amstat.org/membersonly/proceedings/2011/papers/302266_68145.pdf
-
-- ASA-IMS JSM Proceedings (2010): 
-
-https://www.amstat.org/membersonly/proceedings/2010/papers/309104_62376.pdf
+- [JSM (2010)](https://www.amstat.org/membersonly/proceedings/2010/papers/309104_62376.pdf). 
+The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver).
 
 =============
 Requirements:
 =============
 MVR 1.30.3 requires R-3.0.2 (2013-09-25). It was built and tested under R-devel (2015-07-20 r68705) and Travis CI. 
 
-Installation has been tested on Windows, Linux and OSX platforms. See for instance the 'CRAN Package Check Results' here:
-
-https://cran.r-project.org/web/checks/check_results_MVR.html
+Installation has been tested on Windows, Linux and OSX platforms.
+See [CRAN Package Check Results](https://cran.r-project.org/web/checks/check_results_MVR.html).
 
 =============
 Installation: 
