@@ -6,7 +6,7 @@ started publishing logs:
 
 ![](http://cranlogs.r-pkg.org/badges/grand-total/MVR) 
  
-Number of CRAN downloads last month: 
+Number of CRAN downloads for the last 30 days: 
 
 ![](http://cranlogs.r-pkg.org/badges/MVR) 
 
