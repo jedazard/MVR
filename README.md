@@ -1,4 +1,4 @@
-#### General Remarks
+### General Remarks
 
 Grand-total number of CRAN downloads since October 1, 2012, 
 the month the [RStudio CRAN mirror](http://cran-logs.rstudio.com/) 
@@ -14,9 +14,9 @@ Travis CI build result:
 
 ![](https://travis-ci.org/jedazard/MVR.svg)
 
-============
-Description:
-============
+===============
+### Description
+
 Mean-Variance Regularization (MVR) is a non-parametric method for joint adaptive mean-variance regularization and variance stabilization of high-dimensional data.
 It is suited for handling difficult problems posed by high-dimensional multivariate datasets (p >> n
 paradigm), such as in omics-type data, among which are that the variance is often a function of the
@@ -35,20 +35,20 @@ computing to enjoy a fast and easy experience in the R environment
 
 See also below the package news with the R command: MVR.news().
 
-========
-License:
-========
+===========
+### License
+
 MVR is Open Source / Free Software, available under the GNU General Public License, version 3. 
 See details [here](https://github.com/jedazard/MVR/blob/master/LICENSE).
 
-=========================
-Documentation and Manual: 
-=========================
+============================
+### Documentation and Manual
+
 All the codes are in the R folder and a manual (MVR.pdf) details the end-user (and internal) functions. At this stage and for simplicity, there are only 2 end-user function, 4 end-user diagnostic and plotting functions and 2 end-user datasets (synthetic and real). See the "MVR-package" introduction section of the manual for more details and examples.
 
-==========
-References
-==========
+==============
+### References
+
 [CRAN release (2011-07-26)](https://cran.r-project.org/web/packages/MVR/index.html) with change log [here](https://cran.r-project.org/web/packages/MVR/NEWS).
 
 Open access to companion papers (accepted for publication):
@@ -62,17 +62,17 @@ The ASA Proceedings of the annual Joint Statistical Meetings (Miami, FL, USA).
 - [JSM (2010)](https://www.amstat.org/membersonly/proceedings/2010/papers/309104_62376.pdf). 
 The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver, BC, Canada).
 
-=============
-Requirements:
-=============
+================
+### Requirements
+
 MVR 1.30.3 requires R-3.0.2 (2013-09-25). It was built and tested under R-devel (2015-07-20 r68705) and Travis CI. 
 
 Installation has been tested on Windows, Linux and OSX platforms.
 See [CRAN Package Check Results](https://cran.r-project.org/web/checks/check_results_MVR.html).
 
-=============
-Installation: 
-=============
+================
+### Installation
+
 - To install MVR from CRAN, download and install the current version (1.30.2) from the CRAN repository:
 
 install.packages("MVR")
@@ -85,9 +85,9 @@ library("devtools")
 
 devtools::install_github("jedazard/MVR")
 
-======
-Usage: 
-======
+=========
+### Usage
+
 - To load the MVR library in an R session and start using it:
 
 library("MVR")
