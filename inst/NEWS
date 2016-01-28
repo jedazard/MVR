@@ -40,10 +40,11 @@ o RELEASE 1.30.2
 - Built under R-3.2.1 (2015-06-19) and tested under R-devel (2015-07-08 r68642). 
 - Release update to GitHub.
 ---------------------------------------------------------------------------------
-Date   : 2015-07-21
+Date   : 2016-01-28
 o RELEASE 1.30.3
+- Corrected inclusion of C and R headers to comply with g++ 6.0 compiler and good practice in C++ code.
 - Added manual in a 'doc' subfolder within 'inst' folder.
-- Built and tested under R-devel (2015-07-20 r68705). 
+- Built and tested under R-devel (2015-12-22 r69809). 
 - Release update to GitHub.
 ---------------------------------------------------------------------------------
 
