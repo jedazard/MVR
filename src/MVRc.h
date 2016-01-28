@@ -1,3 +1,9 @@
+#include <R.h>
+#include <Rmath.h>
+#include <stdlib.h>
+#include <time.h>
+#include <cmath>
+
 extern "C" {
 
 //=======//
@@ -8,8 +14,6 @@ extern "C" {
 
 #define __MVR_C_R__
 #ifdef __MVR_C_R__
-#include <R.h>
-#include <Rmath.h>
 #else
 typedef bool Rboolean;
 #define TRUE true
@@ -25,9 +29,6 @@ typedef bool Rboolean;
 #ifndef _MVR_STAT_H_
 #define _MVR_STAT_H_
 
-#include <math.h>
-//#include "MVR.h"
-
 double sum(double* a, int n);
 double sd(double* a, double mean, int n);
 #endif
@@ -37,11 +38,6 @@ double sd(double* a, double mean, int n);
 //============//
 #ifndef _MVR_RAND_H_
 #define _MVR_RAND_H_
-
-#include <stdlib.h>
-#include <time.h>
-#include <math.h>
-//#include "MVR.h"
 
 //call MVR_rand_init() for once before calling any functions/macros in this library
 void MVR_rand_init();
@@ -76,6 +72,7 @@ RANDD() is preferred
 Hua XU, PhD
 June, 2011
 */
+
 #define RANDI_MAX 0x3fffffff //or 1073741823, 30 bits
 //#define RANDI() ((rand()&0x7fff) | ((rand()&0x7fff) << 15))
 int randi();
@@ -118,6 +115,7 @@ rand_norm(data, n, mean, s) passed the same test with type 1 error of 0.0410
 Hua XU, PhD
 June, 2011
 */
+
 //n must be even for rand_norm and rand_norm_std, OTHERWISE MEMORY OVERFLOWS
 void rand_norm_std(double* data, int n);
 void rand_norm(double* data, int n, double mean, double s);
@@ -130,6 +128,7 @@ the matrix is mimicked by an array data of size nr x nc as follows:
 ...
 [0,nc-1] ... [nr-1,nc-1]
 */
+
 void rand_spl_row(double* data, int nr, int nc, double* spl, int s, int* pool);
 void rand_spl_row2(double* data, int nr, int nc, double* spl, int s);
 #endif
@@ -139,8 +138,6 @@ void rand_spl_row2(double* data, int nr, int nc, double* spl, int s);
 //==============//
 #ifndef _MVR_KMEANS_H_
 #define _MVR_KMEANS_H_
-
-//#include "MVR.h"
 
 /*
 More algorithms can be added
@@ -158,12 +155,6 @@ Rboolean MVR_kmeans_MacQueen(double *x, double *cen,
 //===========//
 #ifndef _MVR_SUB_H_
 #define _MVR_SUB_H_
-
-#include <math.h>
-//#include "MVR.h"
-//#include "MVR_kmeans.h"
-//#include "MVR_stat.h"
-//#include "MVR_rand.h"
 
 void MVR_km_clustering(double* x,
                        double* x_unq,
