@@ -1,17 +1,14 @@
 ### General Remarks
 
-Grand-total number of CRAN downloads since October 1, 2012, 
+CRAN downloads  October 1, 2012, 
 the month the [RStudio CRAN mirror](http://cran-logs.rstudio.com/) 
 started publishing logs:
-
 [![](http://cranlogs.r-pkg.org/badges/grand-total/MVR)](http://cran.rstudio.com/web/packages/MVR/index.html)
 
-Number of CRAN downloads in the last month:
-
+CRAN downloads in the last month:
 [![](http://cranlogs.r-pkg.org/badges/last-month/MVR)](http://cran.rstudio.com/web/packages/MVR/index.html)
 
-Number of CRAN downloads in the last week:
-
+CRAN downloads in the last week:
 [![](http://cranlogs.r-pkg.org/badges/last-week/MVR)](http://cran.rstudio.com/web/packages/MVR/index.html)
 
 
