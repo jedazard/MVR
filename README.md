@@ -1,4 +1,12 @@
-### General Remarks
+### License
+
+PRIMsrc is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
+sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy of this license, visit 
+[GNU Free Documentation License](http://www.gnu.org/licenses/gpl-3.0.html).
+
+
+=============
+### Downloads
 
 CRAN downloads since October 1, 2012, 
 the month the [RStudio CRAN mirror](http://cran-logs.rstudio.com/) 
@@ -57,14 +65,6 @@ The ASA Proceedings of the annual Joint Statistical Meetings (Miami, FL, USA).
 
 - [JSM (2010)](https://www.amstat.org/membersonly/proceedings/2010/papers/309104_62376.pdf). 
 The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver, BC, Canada).
-
-
-===========
-### License
-
-MVR is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
-sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy of this license, visit 
-[GNU Free Documentation License](http://www.gnu.org/licenses/gpl-3.0.html).
 
 
 ================
