@@ -92,11 +92,9 @@ MVR 1.30.3 requires R-3.0.2 (2013-09-25). It was built and tested under R-devel 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
 See Travis CI build result:
-
 [![Build Status](https://travis-ci.org/jedazard/MVR.png?branch=master)](https://travis-ci.org/jedazard/MVR)
 
 See CRAN checks:
-
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/MVR)](https://cran.r-project.org/web/checks/check_results_MVR.html).
 
 
