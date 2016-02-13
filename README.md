@@ -62,7 +62,7 @@ The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver, BC, Can
 ===========
 ### License
 
-MVR is open source / free software, licensed under the GNU General Public License, version 3 (GPLv3), 
+MVR is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
 sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy of this license, visit 
 [GNU Free Documentation License](http://www.gnu.org/licenses/gpl-3.0.html).
 
