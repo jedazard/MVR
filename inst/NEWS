@@ -47,5 +47,16 @@ o RELEASE 1.30.3
 - Built and tested under R-devel (2015-12-22 r69809). 
 - Release update to GitHub.
 ---------------------------------------------------------------------------------
+Date   : 2016-10-25
+o RELEASE 1.31.0
+BUG FIXES
+- Corrected missing declaration of use of 'std' namespace in C++ code to comply with C++98 and good practice.
+- Corrected number of replications to match the exact same number as user request and not a multiple of the number of cpus available.
+UTILITIES
+- Added a seed for both end-user functions `mvr()` and `mvrt.test()`.
+PACKAGE INSTALLATION
+- Updated Rd, NEWS and CITATION files.  
+- Built and tested under R-devel (2016-06-30 r70858) and release update to GitHub.
+---------------------------------------------------------------------------------
 
 
