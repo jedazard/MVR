@@ -1,4 +1,5 @@
 #include "MVRc.h"
+using namespace std;
 
 extern "C" {
 
