@@ -70,13 +70,13 @@ The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver, BC, Can
 ================
 ### Installation
 
-* To install MVR from CRAN, simply download and install the current version (1.30.3) from the CRAN repository:
+* To install MVR from CRAN, simply download and install the current version (1.31.0) from the CRAN repository:
 
 ```{r}
 install.packages("MVR")
 ```
 
-* Alternatively, you can install the most up-to-date development version (1.30.3) from GitHub, using devtools:
+* Alternatively, you can install the most up-to-date development version (1.31.0) from GitHub, using devtools:
 
 ```{r}
 install.packages("devtools")
@@ -87,7 +87,7 @@ devtools::install_github("jedazard/MVR")
 ================
 ### Requirements
 
-MVR 1.30.3 requires R-3.0.2 (2013-09-25). It was built and tested under R-devel (2015-12-22 r69809) and Travis CI. 
+MVR 1.31.0 requires R-3.0.2 (2013-09-25). It was built and tested under R-devel (2016-06-30 r70858) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
