@@ -57,7 +57,7 @@ cores available.\cr
 \bold{Function for Plotting Summary Cluster Diagnostic Plots.}\cr
 Plot similarity statistic profiles and the optimal joint clustering configuration for the means and the variances by group.
 Plot quantile profiles of means and standard deviations by group and for each clustering configuration, to check that the distributions 
-of first and second moments of the MVR-transformed data approch their respective null distributions under the optimal configuration found, 
+of first and second moments of the MVR-transformed data approach their respective null distributions under the optimal configuration found, 
 assuming independence and normality of all the variables.\cr
 
 \code{\link[MVR]{target.diagnostic}}
@@ -97,11 +97,11 @@ Known Bugs/Problems : None at this time.
 
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
     
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).
@@ -109,9 +109,13 @@ Known Bugs/Problems : None at this time.
 
 \references{
     \itemize{
+        \item Dazard J-E. and J. S. Rao (2010). "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
+              In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
+              Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
         \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
-              In JSM Proceedings, Section for Statistical Programmers and Analysts. Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
-        \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}" 
+              In JSM Proceedings, Section for Statistical Programmers and Analysts. 
+              Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
+        \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}"
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }

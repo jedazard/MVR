@@ -1,9 +1,6 @@
 \name{target.diagnostic}
-
 \alias{target.diagnostic}
-
 \title{Function for Plotting Summary Target Moments Diagnostic Plots}
-
 \description{
     Plot comparative distribution densities of means and standard deviations of the data before and after Mean-Variance Regularization
     to check for location shifts between observed first and second moments and their expected target values under a target centered homoscedastic model. 
@@ -11,7 +8,6 @@
     Plot comparative QQ scatterplots to look at departures between observed distributions of first and second moments of the MVR-transformed data
     and their theoretical distributions assuming independence and normality of all the variables.
 }
-
 \usage{
     target.diagnostic(obj, 
                       title = "Target Moments Diagnostic Plots",
@@ -22,7 +18,6 @@
                       width = 8.5, 
                       height = 6.5, ...)
 }
-
 \arguments{
   \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
   \item{title}{Title of the plot. Defaults to "Target Moments Diagnostic Plots".}
@@ -35,7 +30,6 @@
   \item{height}{\code{Numeric} scalar. Height of the graphics region in inches. Defaults to 6.5.}
   \item{\dots}{Generic arguments passed to other plotting functions.}
 }
-
 \details{
     The plots of the density distribution of means and standard deviations checks that the distributions of means and standard deviations 
     of the MVR-transformed data have correct target first moments, i.e. with mean ~ 0 and mean ~ 1. The expected target mean and standard 
@@ -54,41 +48,39 @@
 
     Option \code{file} is used only if device is specified (i.e. non \code{NULL}).
 }
-
 \value{
     None. Displays the plots on the chosen \code{device}.
 }
-
 \references{
     \itemize{
+        \item Dazard J-E. and J. S. Rao (2010). "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
+              In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
+              Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
         \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
-              In JSM Proceedings, Section for Statistical Programmers and Analysts. Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
-        \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}" 
+              In JSM Proceedings, Section for Statistical Programmers and Analysts. 
+              Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
+        \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}"
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }
-
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
     
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).
 }
-
 \note{
     End-user function.
 }
-
 \seealso{
     \code{justvsn} (R package \pkg{vsn}) Variance stabilization and calibration for microarray data.
     \code{loess} (R package \pkg{stats}) Fit a polynomial surface determined by one or more numerical predictors, using local fitting.
 }
-
 \examples{
 \dontrun{
     #===================================================
@@ -125,7 +117,7 @@
     nc.max <- 30
     probs <- seq(0, 1, 0.01)
     n <- 6
-    GF <- factor(gl(n = 2, k = n/2, len = n), 
+    GF <- factor(gl(n = 2, k = n/2, length = n), 
                  ordered = FALSE, 
                  labels = c("M", "S"))
     mvr.obj <- mvr(data = Real, 
@@ -137,7 +129,8 @@
                    B = 100, 
                    parallel = FALSE, 
                    conf = NULL,
-                   verbose = TRUE)
+                   verbose = TRUE,
+                   seed = 1234)
 
     #===================================================
     # Summary Target Moments Diagnostic Plots (Real dataset)
@@ -151,43 +144,8 @@
                       horizontal = FALSE, 
                       width = 8.5, 
                       height = 6.5)
-
-    #===================================================
-    # Mean-Variance Regularization (Real dataset)
-    # Single-Group Assumption
-    # Assuming equal variance between groups
-    # Without cluster usage
-    #===================================================
-    nc.min <- 1
-    nc.max <- 30
-    probs <- seq(0, 1, 0.01)
-    n <- 6
-    mvr.obj <- mvr(data = Real, 
-                   block = rep(1,n), 
-                   log = FALSE, 
-                   nc.min = nc.min, 
-                   nc.max = nc.max, 
-                   probs = probs, 
-                   B = 100, 
-                   parallel = FALSE, 
-                   conf = NULL, 
-                   verbose = TRUE)
-
-    #===================================================
-    # Summary Target Moments Diagnostic Plots (Real dataset)
-    # Single-Group Assumption
-    # Assuming equal variance between groups
-    #===================================================
-    target.diagnostic(obj = mvr.obj, 
-                      title = "Target Moments Diagnostic Plots 
-                      (Real - Single-Group Assumption)",
-                      device = NULL,
-                      horizontal = FALSE,
-                      width = 8.5,
-                      height = 6.5)
     }
 }
-
 \keyword{Mean-Variance Estimators}
 \keyword{Regularization}
 \keyword{Variance Stabilization}

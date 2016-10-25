@@ -24,7 +24,8 @@
               n.resamp = 100, 
               parallel = FALSE,
               conf = NULL,
-              verbose = TRUE)
+              verbose = TRUE, 
+              seed = NULL)
 }
 
 \arguments{
@@ -33,9 +34,9 @@
               or an object that can be coerced to such a \code{matrix} (such as a \code{numeric} \code{vector} 
               or a \code{data.frame} with all \code{numeric} columns). 
               Missing values (\code{NA}), NotANumber values (\code{NaN}) or Infinite values (\code{Inf}) are not allowed.}
-  \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
+  \item{obj}{Object of class \code{mvr} returned by \code{\link[MVR]{mvr}}.}
   \item{block}{\code{character} or \code{numeric} \code{vector} or \code{factor} grouping/blocking variable 
-               of length the sample size. (see details).}
+               of length the sample size (see details).}
   \item{tolog}{\code{logical} scalar. Is the data to be log2-transformed first? Optional, defaults to \code{FALSE}.
              Note that negative or null values will be changed to 1 before taking log2-transformation.}
   \item{nc.min}{Positive \code{integer} scalar of the minimum number of clusters, defaults to 1}
@@ -53,6 +54,7 @@
               Inputs for R package \pkg{parallel} function \code{makeCluster} (R package \pkg{parallel}) for cluster setup.
               Optional, defaults to \code{NULL}. See details for usage.}
   \item{verbose}{\code{logical} scalar. Is the output to be verbose? Optional, defaults to \code{TRUE}.}
+  \item{seed}{Positive \code{integer} scalar of the user seed to reproduce the results.}
 }
 
 \details{
@@ -65,9 +67,6 @@
     (iii) whether a pre-transformation has been applied (see \cite{Dazard, J-E. and J. S. Rao (2012)} for more details).
     See the cluster diagnostic function \code{\link[MVR]{cluster.diagnostic}} for more details, whether larger values of \code{nc.max} may be required.
 
-    Argument \code{n.resamp} is reset to \code{conf$cpus}*\code{ceiling}(\code{n.resamp}/\code{conf$cpus}) in case the cluster 
-    is used (i.e. \code{conf} is non \code{NULL}), where \code{conf$cpus} denotes the total number of CPUs to be used (see below).
-
     To save un-necessary computations, previously computed MVR clustering can be provided through option \code{obj} (i.e. \code{obj} is fully 
     specified as a \code{\link[MVR]{mvr}} object). In this case, arguments \code{data}, \code{block}, \code{tolog}, \code{nc.min}, \code{nc.max} 
     are ignored. If \code{obj} is fully specified (i.e. an object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}), the 
@@ -76,10 +75,9 @@
     
     To run a parallel session (and parallel RNG) of the MVR procedures (\code{parallel}=\code{TRUE}), argument \code{conf} 
     is to be specified (i.e. non \code{NULL}). It must list the specifications of the folowing parameters for cluster configuration:
-    "names", "cpus", "type", "homo", "verbose", "outfile". These match the arguments described in function \code{makeCluster} 
-    of the R package \pkg{parallel}. All fields are required to properly configure the cluster, except for "names" and "cpus", 
-    which are the values used alternatively in the case of a cluster of type "SOCK" (socket), or in the case of a cluster 
-    of type other than "SOCK" (socket), respectively.
+    "names", "cpus", "type", "homo", "verbose", "outfile". These match the arguments described in function \code{makeCluster}
+    of the R package \pkg{parallel}. All fields are required to properly configure the cluster. Values of "names" and "cpus",
+    are used alternatively to setup a cluster of type socket ("SOCK") or non-socket ("PVM", "MPI"), respectively. See examples below.
     \itemize{
         \item "names": \code{names} : \code{character} vector specifying the host names on which to run the job.
               Could default to a unique local machine, in which case, one may use the unique host name "localhost".
@@ -96,12 +94,17 @@
     is done internally by distributing the stream states to the nodes (For more details see function \code{makeCluster} 
     (R package \pkg{parallel}) and/or \url{http://www.stat.uiowa.edu/~luke/R/cluster/cluster.html}.
     
-    In case p-values are desired (\code{pval}=\code{TRUE}), the use of the cluster is highly recommended. 
+    In case p-values are desired (\code{pval}=\code{TRUE}), the use of a cluster is highly recommended. 
     It is ideal for computing embarassingly parallel tasks such as permutation or bootstrap resamplings.
     Note that in case both regularized t-test statistics and p-values are desired, in order to maximize computational efficiency and 
     avoid multiple configurations (since a cluster can only be configured and used one session at a time, which otherwise would result in a run stop), 
     the cluster configuration will only be used for the parallel computation of p-values, but not for the MVR clustering computation 
     of the regularized t-test statistics.
+      
+    The use of a seed allows to reproduce the results within the same type of session: the same seed will reproduce the same results 
+    within a non-parallel session or within a parallel session, but it will not necessarily give the exact same results (up to sampling variability)
+    between a non-parallelized and parallelized session due to the difference of management of the seed between the two (see parallel RNG and 
+    value of returned seed below).
 }
 
 \value{
@@ -109,24 +112,30 @@
                      where entries are the t-statistics values of each variable.}
     \item{p.value}{\code{vector}, of size the number of variables, 
                    where entries are the p-values (if requested, otherwise \code{NULL} value) of each variable.}
+    \item{seed}{User seed(s) used: \code{integer} of a single value, if parallelization is used. 
+                \code{integer} \code{vector} of values, one for each replication, if parallelization is not used.}
 }
 
 \references{
     \itemize{
+        \item Dazard J-E. and J. S. Rao (2010). "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
+              In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
+              Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
         \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
-              In JSM Proceedings, Section for Statistical Programmers and Analysts. Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
-        \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}" 
+              In JSM Proceedings, Section for Statistical Programmers and Analysts. 
+              Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
+        \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}"
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }
 
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
     
     Acknowledgments: This project was partially funded by the 
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).
@@ -185,7 +194,7 @@ nc.min <- 1
 nc.max <- 10
 probs <- seq(0, 1, 0.01)
 n <- 10
-GF <- factor(gl(n = 2, k = n/2, len = n), 
+GF <- factor(gl(n = 2, k = n/2, length = n), 
              ordered = FALSE, 
              labels = c("G1", "G2"))
 mvr.obj <- mvr(data = Synthetic, 
@@ -197,20 +206,25 @@ mvr.obj <- mvr(data = Synthetic,
                B = 100,
                parallel = FALSE, 
                conf = NULL,
-               verbose = TRUE)
-mvrt.obj <- mvrt.test(obj = mvr.obj, 
-                      pval = FALSE, 
-                      parallel = FALSE, 
+               verbose = TRUE,
+               seed = 1234)
+mvrt.obj <- mvrt.test(data = NULL,
+                      obj = mvr.obj,
+                      block = NULL,
+                      pval = FALSE,
+                      replace = FALSE,
+                      n.resamp = 100,
+                      parallel = FALSE,
                       conf = NULL,
-                      verbose = TRUE)
-                      
+                      verbose = TRUE,
+                      seed = 1234)       
 \dontrun{
     #===================================================
-    # Examples of parallelization below with 
-    # a SOCKET or MPI cluster configuration
+    # Examples of parallel backend parametrization 
     #===================================================
-    # 1- WINDOWS multicores PC with SOCKET communication
-    #    With a 2-Quad (8-CPUs) PC
+    # Example #1 - 1-Quad (4-core double threaded) PC 
+    # Running WINDOWS
+    # With SOCKET communication
     #===================================================
     if (.Platform$OS.type == "windows") {
         cpus <- detectCores()
@@ -222,11 +236,10 @@ mvrt.obj <- mvrt.test(obj = mvr.obj,
                      "outfile" = "")
     }
     #===================================================
-    # 2- LINUX multinodes cluster with SOCKET communication
-    #    with 4-nodes (32-CPUs) cluster
-    #    with 1 masternode and 3 workernodes
-    #    All hosts run identical setups
-    #    Same number of core CPUs (8) per node
+    # Example #2 - 1 master node + 3 worker nodes cluster
+    # All nodes equipped with identical setups and multicores
+    # Running LINUX
+    # With SOCKET communication
     #===================================================
     if (.Platform$OS.type == "unix") {
         masterhost <- Sys.getenv("HOSTNAME")
@@ -242,18 +255,14 @@ mvrt.obj <- mvrt.test(obj = mvr.obj,
                      "outfile" = "")
     }
     #===================================================
-    # 3- LINUX multinodes cluster with MPI communication
-    #    Here, a file named ".nodes" (e.g. in the home directory)
-    #    must contain the list of nodes of the cluster
+    # Example #3 - Multinode multicore per node cluster
+    # Running LINUX 
+    # with MPI communication
+    # Below, variable `cpus` must be the total number 
+    # of spawned core CPUs (slaves)
     #===================================================
     if (.Platform$OS.type == "unix") {
-        hosts <- scan(file=paste(Sys.getenv("HOME"), "/.nodes", sep=""), 
-                      what="", 
-                      sep="\n")
-        hostnames <- unique(hosts)
-        nodes <- length(hostnames)
-        cpus <-  length(hosts)/length(hostnames)
-        conf <- list("cpus" = nodes * cpus,
+        conf <- list("cpus" = cpus,
                      "type" = "MPI",
                      "homo" = TRUE,
                      "verbose" = TRUE,
@@ -268,7 +277,7 @@ mvrt.obj <- mvrt.test(obj = mvr.obj,
     nc.max <- 30
     probs <- seq(0, 1, 0.01)
     n <- 6
-    GF <- factor(gl(n = 2, k = n/2, len = n), 
+    GF <- factor(gl(n = 2, k = n/2, length = n), 
                  ordered = FALSE, 
                  labels = c("M", "S"))
     mvr.obj <- mvr(data = Real, 
@@ -280,7 +289,8 @@ mvrt.obj <- mvrt.test(obj = mvr.obj,
                    B = 100, 
                    parallel = TRUE, 
                    conf = conf,
-                   verbose = TRUE)
+                   verbose = TRUE,
+                   seed = 1234)
     #===================================================
     # Regularized t-test statistics (Real dataset) 
     # Multi-Group Assumption
@@ -288,13 +298,16 @@ mvrt.obj <- mvrt.test(obj = mvr.obj,
     # With option to use prior MVR clustering results
     # With computation of p-values
     #===================================================
-    mvrt.obj <- mvrt.test(obj = mvr.obj, 
-                          pval = TRUE, 
-                          replace = FALSE, 
-                          n.resamp = 100, 
-                          parallel = TRUE, 
+    mvrt.obj <- mvrt.test(data = NULL,
+                          obj = mvr.obj,
+                          block = NULL,
+                          pval = TRUE,
+                          replace = FALSE,
+                          n.resamp = 100,
+                          parallel = TRUE,
                           conf = conf,
-                          verbose = TRUE)
+                          verbose = TRUE,
+                          seed = 1234)
     }
 }
 

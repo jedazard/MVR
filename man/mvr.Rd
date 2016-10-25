@@ -21,7 +21,8 @@
         B = 100,
         parallel = FALSE,
         conf = NULL,
-        verbose = TRUE)
+        verbose = TRUE, 
+        seed = NULL)
 }
 
 \arguments{
@@ -44,6 +45,7 @@
               Inputs for R package \pkg{parallel} function \code{makeCluster} (R package \pkg{parallel}) for cluster setup.
               Optional, defaults to \code{NULL}. See details for usage.}
   \item{verbose}{\code{logical} scalar. Is the output to be verbose? Optional, defaults to \code{TRUE}.}
+  \item{seed}{Positive \code{integer} scalar of the user seed to reproduce the results.}
 }
 
 \details{
@@ -51,9 +53,6 @@
     with as many different \code{character} or \code{numeric} values as the number of levels or sample groups.
     It defaults to single group situation, i.e. under the assumption of equal variance between sample groups.
     All group sample sizes must be greater than 1, otherwise the program will stop.
-
-    Note that argument \code{B} is internally reset to \code{conf$cpus}*\code{ceiling}(\code{B}/\code{conf$cpus}) in case the parallelization
-    is used (i.e. \code{conf} is non \code{NULL}), where \code{conf$cpus} denotes the total number of CPUs to be used (see below).
 
     Argument \code{nc.max} currently defaults to 30. Empirically, we found that this is enough for most datasets tested.
     This depends on (i) the dimensionality/sample size ratio \eqn{\frac{p}{n}}, (ii) the signal/noise ratio, and
@@ -63,9 +62,8 @@
     To run a parallel session (and parallel RNG) of the MVR procedures (\code{parallel}=\code{TRUE}), argument \code{conf}
     is to be specified (i.e. non \code{NULL}). It must list the specifications of the folowing parameters for cluster configuration:
     "names", "cpus", "type", "homo", "verbose", "outfile". These match the arguments described in function \code{makeCluster}
-    of the R package \pkg{parallel}. All fields are required to properly configure the cluster, except for "names" and "cpus",
-    which are the values used alternatively in the case of a cluster of type "SOCK" (socket), or in the case of a cluster
-    of type other than "SOCK" (socket), respectively.
+    of the R package \pkg{parallel}. All fields are required to properly configure the cluster. Values of "names" and "cpus",
+    are used alternatively to setup a cluster of type socket ("SOCK") or non-socket ("PVM", "MPI"), respectively. See examples below.
     \itemize{
         \item "names": \code{names} : \code{character} vector specifying the host names on which to run the job.
               Could default to a unique local machine, in which case, one may use the unique host name "localhost".
@@ -82,15 +80,18 @@
     In addition, when random number generation is needed, the creation of separate streams of parallel RNG per node
     is done internally by distributing the stream states to the nodes (For more details see function \code{makeCluster}
     (R package \pkg{parallel}) and/or \url{http://www.stat.uiowa.edu/~luke/R/cluster/cluster.html}.
+          
+    The use of a seed allows to reproduce the results within the same type of session: the same seed will reproduce the same results 
+    within a non-parallel session or within a parallel session, but it will not necessarily give the exact same results (up to sampling variability)
+    between a non-parallelized and parallelized session due to the difference of management of the seed between the two (see parallel RNG and 
+    value of returned seed below).
 }
 
 \value{
     \item{Xraw}{\code{numeric} \code{matrix} of original data.}
     \item{Xmvr}{\code{numeric} \code{matrix} of MVR-transformed data.}
-    \item{centering}{\code{numeric} \code{vector} of centering values
-                     for standardization (cluster mean of pooled sample mean).}
-    \item{scaling}{\code{numeric} \code{vector} of scaling values
-                   for standardization (cluster mean of pooled sample std dev).}
+    \item{centering}{\code{numeric} \code{vector} of centering values for standardization (cluster mean of pooled sample mean).}
+    \item{scaling}{\code{numeric} \code{vector} of scaling values for standardization (cluster mean of pooled sample std dev).}
     \item{MVR}{\code{list} (of size the number of groups) containing for each group:
         \itemize{
             \item membership {\code{numeric} \code{vector} of cluster membership of each variable}
@@ -110,12 +111,18 @@
     \item{nc.min}{Value of argument \code{nc.min}.}
     \item{nc.max}{Value of argument \code{nc.max}.}
     \item{probs}{Value of argument \code{probs}.}
+    \item{seed}{User seed(s) used: \code{integer} of a single value, if parallelization is used. 
+                \code{integer} \code{vector} of values, one for each replication, if parallelization is not used.}
 }
 
 \references{
     \itemize{
+        \item Dazard J-E. and J. S. Rao (2010). "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
+              In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
+              Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
         \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
-              In JSM Proceedings, Section for Statistical Programmers and Analysts. Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
+              In JSM Proceedings, Section for Statistical Programmers and Analysts. 
+              Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
         \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}"
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
@@ -123,11 +130,11 @@
 
 \author{
     \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
+        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
         \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
         \item "Alberto Santana, MBA." \email{ahs4@case.edu}
     }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jxd101@case.edu}
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
 
     Acknowledgments: This project was partially funded by the
     National Institutes of Health (P30-CA043703 to J-E.DAZARD).
@@ -189,15 +196,16 @@ mvr.obj <- mvr(data = Synthetic,
                B = 100,
                parallel = FALSE,
                conf = NULL,
-               verbose = TRUE)
+               verbose = TRUE,
+               seed = 1234)
 
 \dontrun{
     #===================================================
-    # Examples of parallelization below with 
-    # a SOCKET or MPI cluster configuration
+    # Examples of parallel backend parametrization 
     #===================================================
-    # 1- WINDOWS multicores PC with SOCKET communication
-    #    With a 2-Quad (8-CPUs) PC
+    # Example #1 - 1-Quad (4-core double threaded) PC 
+    # Running WINDOWS
+    # With SOCKET communication
     #===================================================
     if (.Platform$OS.type == "windows") {
         cpus <- detectCores()
@@ -209,11 +217,10 @@ mvr.obj <- mvr(data = Synthetic,
                      "outfile" = "")
     }
     #===================================================
-    # 2- LINUX multinodes cluster with SOCKET communication
-    #    with 4-nodes (32-CPUs) cluster
-    #    with 1 masternode and 3 workernodes
-    #    All hosts run identical setups
-    #    Same number of core CPUs (8) per node
+    # Example #2 - 1 master node + 3 worker nodes cluster
+    # All nodes equipped with identical setups and multicores
+    # Running LINUX
+    # With SOCKET communication
     #===================================================
     if (.Platform$OS.type == "unix") {
         masterhost <- Sys.getenv("HOSTNAME")
@@ -229,18 +236,14 @@ mvr.obj <- mvr(data = Synthetic,
                      "outfile" = "")
     }
     #===================================================
-    # 3- LINUX multinodes cluster with MPI communication
-    #    Here, a file named ".nodes" (e.g. in the home directory)
-    #    must contain the list of nodes of the cluster
+    # Example #3 - Multinode multicore per node cluster
+    # Running LINUX 
+    # with MPI communication
+    # Below, variable `cpus` must be the total number 
+    # of spawned core CPUs (slaves)
     #===================================================
     if (.Platform$OS.type == "unix") {
-        hosts <- scan(file=paste(Sys.getenv("HOME"), "/.nodes", sep=""), 
-                      what="", 
-                      sep="\n")
-        hostnames <- unique(hosts)
-        nodes <- length(hostnames)
-        cpus <-  length(hosts)/length(hostnames)
-        conf <- list("cpus" = nodes * cpus,
+        conf <- list("cpus" = cpus,
                      "type" = "MPI",
                      "homo" = TRUE,
                      "verbose" = TRUE,
@@ -256,7 +259,7 @@ mvr.obj <- mvr(data = Synthetic,
     nc.max <- 30
     probs <- seq(0, 1, 0.01)
     n <- 6
-    GF <- factor(gl(n = 2, k = n/2, len = n),
+    GF <- factor(gl(n = 2, k = n/2, length = n),
                  ordered = FALSE,
                  labels = c("M", "S"))
     mvr.obj <- mvr(data = Real,
@@ -268,7 +271,8 @@ mvr.obj <- mvr(data = Synthetic,
                    B = 100,
                    parallel = TRUE,
                    conf = conf,
-                   verbose = TRUE)
+                   verbose = TRUE,
+                   seed = 1234)
     }
 }
 
