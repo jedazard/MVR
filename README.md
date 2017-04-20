@@ -11,13 +11,13 @@ sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy
 CRAN downloads since October 1, 2012, 
 the month the [RStudio CRAN mirror](http://cran-logs.rstudio.com/) 
 started publishing logs:
-[![](http://cranlogs.r-pkg.org/badges/grand-total/MVR)](http://cran.rstudio.com/web/packages/MVR/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/MVR)](https://CRAN.R-project.org/package=MVR)
 
 CRAN downloads in the last month:
-[![](http://cranlogs.r-pkg.org/badges/last-month/MVR)](http://cran.rstudio.com/web/packages/MVR/index.html)
+[![](http://cranlogs.r-pkg.org/badges/last-month/MVR)](https://CRAN.R-project.org/package=MVR)
 
 CRAN downloads in the last week:
-[![](http://cranlogs.r-pkg.org/badges/last-week/MVR)](http://cran.rstudio.com/web/packages/MVR/index.html)
+[![](http://cranlogs.r-pkg.org/badges/last-week/MVR)](https://CRAN.R-project.org/package=MVR)
 
 
 ===============
