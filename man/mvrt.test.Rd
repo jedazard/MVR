@@ -50,9 +50,18 @@
   \item{n.resamp}{Positive \code{integer} scalar of the number of resamplings to compute (default=100) by permutation or 
                   bootstsrap (see details).}
   \item{parallel}{\code{logical} scalar. Is parallel computing to be performed? Optional, defaults to \code{FALSE}.}           
-  \item{conf}{\code{list} of parameters for cluster configuration.
-              Inputs for R package \pkg{parallel} function \code{makeCluster} (R package \pkg{parallel}) for cluster setup.
-              Optional, defaults to \code{NULL}. See details for usage.}
+    \item{conf}{
+        \code{list} of 5 fields containing the parameters values needed for creating the parallel backend (cluster configuration).
+        See details below for usage. Optional, defaults to \code{NULL}, but all fields are required if used:
+        \itemize{
+            \item \code{type} : \code{character} \code{vector} specifying the cluster type ("SOCKET", "MPI").
+            \item \code{spec} : A specification (\code{character} \code{vector} or \code{integer} scalar) appropriate to the type of cluster.
+            \item \code{homogeneous} : \code{logical} scalar to be set to \code{FALSE} for inhomogeneous clusters.
+            \item \code{verbose} : \code{logical} scalar to be set to \code{FALSE} for quiet mode.
+            \item \code{outfile} : \code{character} \code{vector} of an output log file name to direct the stdout and stderr
+                  connection output from the workernodes. "" indicates no redirection.
+        }
+    }
   \item{verbose}{\code{logical} scalar. Is the output to be verbose? Optional, defaults to \code{TRUE}.}
   \item{seed}{Positive \code{integer} scalar of the user seed to reproduce the results.}
 }
@@ -73,26 +82,34 @@
     the MVR clustering provided by \code{obj} will be used for the computation of the regularized t-test statistics. 
     If \code{obj}=\code{NULL}, a MVR clustering computation for the regularized t-test statistics and/or p-values will be performed.
     
-    To run a parallel session (and parallel RNG) of the MVR procedures (\code{parallel}=\code{TRUE}), argument \code{conf} 
-    is to be specified (i.e. non \code{NULL}). It must list the specifications of the folowing parameters for cluster configuration:
-    "names", "cpus", "type", "homo", "verbose", "outfile". These match the arguments described in function \code{makeCluster}
-    of the R package \pkg{parallel}. All fields are required to properly configure the cluster. Values of "names" and "cpus",
-    are used alternatively to setup a cluster of type socket ("SOCK") or non-socket ("PVM", "MPI"), respectively. See examples below.
+    The function \code{mvrt.test} relies on the R package \pkg{parallel} to create a parallel backend within an R session, enabling access to a cluster
+    of compute cores and/or nodes on a local and/or remote machine(s) and scaling-up with the number of CPU cores available and efficient parallel 
+    execution. To run a procedure in parallel (with parallel RNG), argument \code{parallel} is to be set to \code{TRUE} and argument \code{conf} 
+    is to be specified (i.e. non \code{NULL}). Argument \code{conf} uses the options described in function \code{makeCluster} of the R packages 
+    \pkg{parallel} and \pkg{snow}. \pkg{PRIMsrc} supports two types of communication mechanisms between master and worker processes: 
+    'Socket' or  'Message-Passing Interface' ('MPI'). In \pkg{PRIMsrc}, parallel 'Socket' clusters use sockets communication mechanisms only 
+    (no forking) and are therefore available on all platforms, including Windows, while parallel 'MPI' clusters use high-speed interconnects 
+    mechanism in networks of computers (with distributed memory) and are therefore available only in these architectures. A parallel 'MPI' 
+    cluster also requires R package \pkg{Rmpi} to be installed first. Value \code{type} is used to setup a cluster of type 'Socket' ("SOCKET") 
+    or 'MPI' ("MPI"), respectively. Depending on this type, values of \code{spec} are to be used alternatively:
     \itemize{
-        \item "names": \code{names} : \code{character} vector specifying the host names on which to run the job.
-              Could default to a unique local machine, in which case, one may use the unique host name "localhost".
-              Each host name can potentially be repeated to the number of CPU cores available on the corresponding machine.
-        \item "cpus": \code{spec} : \code{integer} scalar specifying the total number of CPU cores to be used
-              across the network of available nodes, counting the workernodes and masternode.
-        \item "type": \code{type} : \code{character} vector specifying the cluster type ("SOCK", "PVM", "MPI").
-        \item "homo": \code{homogeneous} : \code{logical} scalar to be set to \code{FALSE} for inhomogeneous clusters. 
-        \item "verbose": \code{verbose} : \code{logical} scalar to be set to \code{FALSE} for quiet mode. 
-        \item "outfile": \code{outfile} : \code{character} vector of the output log file name for the workernodes.
+        \item For 'Socket' clusters (\code{conf$type="SOCKET"}), \code{spec} should be a \code{character} \code{vector} naming the hosts on which 
+              to run the job; it can default to a unique local machine, in which case, one may use the unique host name "localhost".
+              Each host name can potentially be repeated to the number of CPU cores available on the local machine.
+              It can also be an \code{integer} scalar specifying the number of processes to spawn on the local machine; 
+              or a list of machine specifications (a character value named host specifying the name or address of the host to use).
+        \item For 'MPI' clusters (\code{conf$type="MPI"}), \code{spec} should be an \code{integer} scalar 
+              specifying the total number of processes to be spawned across the network of available nodes, counting the workernodes and masternode.
     }
-    Note that the actual creation of the cluster, its initialization, and closing are all done internally. 
-    In addition, when random number generation is needed, the creation of separate streams of parallel RNG per node
-    is done internally by distributing the stream states to the nodes (For more details see function \code{makeCluster} 
-    (R package \pkg{parallel}) and/or \url{http://www.stat.uiowa.edu/~luke/R/cluster/cluster.html}.
+    The actual creation of the cluster, its initialization, and closing are all done internally. For more details, 
+    see the reference manual of R package \pkg{snow} and examples below.
+
+    When random number generation is needed, the creation of separate streams of parallel RNG per node is done internally by 
+    distributing the stream states to the nodes. For more details, see the vignette of R package \pkg{parallel}. 
+    The use of a seed allows to reproduce the results within the same type of session: the same seed will reproduce the same results within 
+    a non-parallel session or within a parallel session, but it will not necessarily give the exact same results (up to sampling variability)
+    between a non-parallelized and parallelized session due to the difference of management of the seed between the two (see parallel RNG and 
+    value of returned seed below).
     
     In case p-values are desired (\code{pval}=\code{TRUE}), the use of a cluster is highly recommended. 
     It is ideal for computing embarassingly parallel tasks such as permutation or bootstrap resamplings.
@@ -100,11 +117,6 @@
     avoid multiple configurations (since a cluster can only be configured and used one session at a time, which otherwise would result in a run stop), 
     the cluster configuration will only be used for the parallel computation of p-values, but not for the MVR clustering computation 
     of the regularized t-test statistics.
-      
-    The use of a seed allows to reproduce the results within the same type of session: the same seed will reproduce the same results 
-    within a non-parallel session or within a parallel session, but it will not necessarily give the exact same results (up to sampling variability)
-    between a non-parallelized and parallelized session due to the difference of management of the seed between the two (see parallel RNG and 
-    value of returned seed below).
 }
 
 \value{
@@ -175,7 +187,7 @@ library("MVR")
 
     #===================================================
     # Loading of the Synthetic and Real datasets
-    # (see description of datasets)
+    # Use help for descriptions
     #===================================================
     data("Synthetic", "Real", package="MVR")
     ?Synthetic
@@ -222,52 +234,50 @@ mvrt.obj <- mvrt.test(data = NULL,
     #===================================================
     # Examples of parallel backend parametrization 
     #===================================================
-    # Example #1 - 1-Quad (4-core double threaded) PC 
-    # Running WINDOWS
-    # With SOCKET communication
+    # Example #1 - Quad core PC 
+    # Running WINDOWS with SOCKET communication
     #===================================================
-    if (.Platform$OS.type == "windows") {
-        cpus <- detectCores()
-        conf <- list("names" = rep("localhost", cpus),
-                     "cpus" = cpus,
-                     "type" = "SOCK",
-                     "homo" = TRUE,
-                     "verbose" = TRUE,
-                     "outfile" = "")
+    cpus <- detectCores(logical = TRUE)
+    conf <- list("spec" = rep("localhost", cpus),
+                 "type" = "SOCKET",
+                 "homo" = TRUE,
+                 "verbose" = TRUE,
+                 "outfile" = "")
+    #===================================================
+    # Example #2 - Master node + 3 Worker nodes cluster
+    # Running LINUX with SOCKET communication
+    # All nodes equipped with identical setups of 
+    # multicores (8 core CPUs per machine for a total of 32)
+    #===================================================
+    masterhost <- Sys.getenv("HOSTNAME")
+    slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
+    nodes <- length(slavehosts) + 1
+    cpus <- 8
+    conf <- list("spec" = c(rep(masterhost, cpus),
+                            rep(slavehosts, cpus)),
+                 "type" = "SOCKET",
+                 "homo" = TRUE,
+                 "verbose" = TRUE,
+                 "outfile" = "")
+    #===================================================
+    # Example #3 - Multinode of multicore per node cluster
+    # Running LINUX with SLURM scheduler and MPI communication
+    # Below, variable 'cpus' is the total number 
+    # of requested core CPUs, which is specified from  
+    # within a SLURM script.
+    #===================================================
+    cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
+    if (require("Rmpi")) {
+        print("Rmpi is loaded correctly \n")
+    } else {
+        stop("Rmpi must be installed first \n")
     }
-    #===================================================
-    # Example #2 - 1 master node + 3 worker nodes cluster
-    # All nodes equipped with identical setups and multicores
-    # Running LINUX
-    # With SOCKET communication
-    #===================================================
-    if (.Platform$OS.type == "unix") {
-        masterhost <- Sys.getenv("HOSTNAME")
-        slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
-        nodes <- length(slavehosts) + 1
-        cpus <- 8
-        conf <- list("names" = c(rep(masterhost, cpus),
-                                 rep(slavehosts, cpus)),
-                     "cpus" = nodes * cpus,
-                     "type" = "SOCK",
-                     "homo" = TRUE,
-                     "verbose" = TRUE,
-                     "outfile" = "")
-    }
-    #===================================================
-    # Example #3 - Multinode multicore per node cluster
-    # Running LINUX 
-    # with MPI communication
-    # Below, variable `cpus` must be the total number 
-    # of spawned core CPUs (slaves)
-    #===================================================
-    if (.Platform$OS.type == "unix") {
-        conf <- list("cpus" = cpus,
-                     "type" = "MPI",
-                     "homo" = TRUE,
-                     "verbose" = TRUE,
-                     "outfile" = "")
-    }
+    conf <- list("spec" = cpus,
+                 "type" = "MPI",
+                 "homo" = TRUE,
+                 "verbose" = TRUE,
+                 "outfile" = "")
+
     #===================================================
     # Mean-Variance Regularization (Real dataset)
     # Multi-Group Assumption
