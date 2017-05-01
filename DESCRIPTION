@@ -19,8 +19,8 @@ Description: This is a non-parametric method for joint adaptive mean-variance re
             (ii) Computation of mean-variance-regularized t-statistics (F-statistics to follow),
             (iii) Generation of diverse diagnostic plots,
             (iv) Computationally efficient implementation using C/C++ interfacing and an option for parallel computing to enjoy a faster and easier experience in the R environment.
-Depends: R (>= 3.0.2), parallel, statmod
-Imports: graphics, grDevices, methods, stats
+Depends: R (>= 3.0.2), statmod
+Imports: parallel, Rmpi
 URL: https://github.com/jedazard/MVR
 Repository: CRAN
 License: GPL (>= 3) | file LICENSE
