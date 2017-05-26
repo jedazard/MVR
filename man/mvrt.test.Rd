@@ -128,6 +128,15 @@
                 \code{integer} \code{vector} of values, one for each replication, if parallelization is not used.}
 }
 
+\author{
+    \itemize{
+        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+        \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
+        \item "Alberto Santana, MBA." \email{ahs4@case.edu}
+    }
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}    
+}
+
 \references{
     \itemize{
         \item Dazard J-E. and J. S. Rao (2010). "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
@@ -141,16 +150,9 @@
     }
 }
 
-\author{
-    \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
-        \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
-        \item "Alberto Santana, MBA." \email{ahs4@case.edu}
-    }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
-    
-    Acknowledgments: This project was partially funded by the 
-    National Institutes of Health (P30-CA043703 to J-E.DAZARD).
+\section{Acknowledgments}{
+    This work made use of the High Performance Computing Resource in the Core Facility for Advanced Research Computing at Case Western Reserve University. 
+    This project was partially funded by the National Institutes of Health (P30-CA043703).
 }
 
 \note{
@@ -234,10 +236,16 @@ mvrt.obj <- mvrt.test(data = NULL,
     #===================================================
     # Examples of parallel backend parametrization 
     #===================================================
+    if (require("parallel")) {
+       print("'parallel' is attached correctly \n")
+    } else {
+       stop("'parallel' must be attached first \n")
+    }
+    #===================================================
     # Example #1 - Quad core PC 
     # Running WINDOWS with SOCKET communication
     #===================================================
-    cpus <- detectCores(logical = TRUE)
+    cpus <- parallel::detectCores(logical = TRUE)
     conf <- list("spec" = rep("localhost", cpus),
                  "type" = "SOCKET",
                  "homo" = TRUE,
@@ -266,18 +274,17 @@ mvrt.obj <- mvrt.test(data = NULL,
     # of requested core CPUs, which is specified from  
     # within a SLURM script.
     #===================================================
-    cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
     if (require("Rmpi")) {
-        print("Rmpi is loaded correctly \n")
+        print("'Rmpi' is attached correctly \n")
     } else {
-        stop("Rmpi must be installed first \n")
+        stop("'Rmpi' must be attached first \n")
     }
+    cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
     conf <- list("spec" = cpus,
                  "type" = "MPI",
                  "homo" = TRUE,
                  "verbose" = TRUE,
                  "outfile" = "")
-
     #===================================================
     # Mean-Variance Regularization (Real dataset)
     # Multi-Group Assumption

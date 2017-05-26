@@ -1,6 +1,9 @@
 \name{target.diagnostic}
+
 \alias{target.diagnostic}
+
 \title{Function for Plotting Summary Target Moments Diagnostic Plots}
+
 \description{
     Plot comparative distribution densities of means and standard deviations of the data before and after Mean-Variance Regularization
     to check for location shifts between observed first and second moments and their expected target values under a target centered homoscedastic model. 
@@ -8,6 +11,7 @@
     Plot comparative QQ scatterplots to look at departures between observed distributions of first and second moments of the MVR-transformed data
     and their theoretical distributions assuming independence and normality of all the variables.
 }
+
 \usage{
     target.diagnostic(obj, 
                       title = "Target Moments Diagnostic Plots",
@@ -18,6 +22,7 @@
                       width = 8.5, 
                       height = 6.5, ...)
 }
+
 \arguments{
   \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
   \item{title}{Title of the plot. Defaults to "Target Moments Diagnostic Plots".}
@@ -30,6 +35,7 @@
   \item{height}{\code{Numeric} scalar. Height of the graphics region in inches. Defaults to 6.5.}
   \item{\dots}{Generic arguments passed to other plotting functions.}
 }
+
 \details{
     The plots of the density distribution of means and standard deviations checks that the distributions of means and standard deviations 
     of the MVR-transformed data have correct target first moments, i.e. with mean ~ 0 and mean ~ 1. The expected target mean and standard 
@@ -48,9 +54,20 @@
 
     Option \code{file} is used only if device is specified (i.e. non \code{NULL}).
 }
+
 \value{
     None. Displays the plots on the chosen \code{device}.
 }
+
+\author{
+    \itemize{
+        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
+        \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
+        \item "Alberto Santana, MBA." \email{ahs4@case.edu}
+    }
+    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}    
+}
+
 \references{
     \itemize{
         \item Dazard J-E. and J. S. Rao (2010). "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
@@ -63,24 +80,21 @@
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }
-\author{
-    \itemize{
-        \item "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
-        \item "Hua Xu, Ph.D." \email{huaxu77@gmail.com}
-        \item "Alberto Santana, MBA." \email{ahs4@case.edu}
-    }
-    Maintainer: "Jean-Eudes Dazard, Ph.D." \email{jean-eudes.dazard@case.edu}
-    
-    Acknowledgments: This project was partially funded by the 
-    National Institutes of Health (P30-CA043703 to J-E.DAZARD).
+
+\section{Acknowledgments}{
+    This work made use of the High Performance Computing Resource in the Core Facility for Advanced Research Computing at Case Western Reserve University. 
+    This project was partially funded by the National Institutes of Health (P30-CA043703).
 }
+
 \note{
     End-user function.
 }
+
 \seealso{
     \code{justvsn} (R package \pkg{vsn}) Variance stabilization and calibration for microarray data.
     \code{loess} (R package \pkg{stats}) Fit a polynomial surface determined by one or more numerical predictors, using local fitting.
 }
+
 \examples{
 \dontrun{
     #===================================================
