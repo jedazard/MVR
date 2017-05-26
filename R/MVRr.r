@@ -75,19 +75,21 @@ mvr <- function(data,
       data <- log2(data)
    }
 
-   if (parallel) {
-      if (conf$type == "SOCK") {
-         cl <- makeCluster(spec=conf$names,
-                           type=conf$type,
-                           homogeneous=conf$homo,
-                           outfile=conf$outfile,
-                           verbose=conf$verbose)
+   if (parallel) {     
+      if (conf$type == "SOCKET") {
+         cl <- parallel::makeCluster(spec=conf$spec,
+                                     type="PSOCK",
+                                     homogeneous=conf$homo,
+                                     outfile=conf$outfile,
+                                     verbose=conf$verbose)
+      } else if (conf$type == "MPI") {
+        cl <- parallel::makeCluster(spec=conf$spec,
+                                     type="MPI",
+                                     homogeneous=conf$homo,
+                                     outfile=conf$outfile,
+                                     verbose=conf$verbose)
       } else {
-         cl <- makeCluster(spec=conf$cpus,
-                           type=conf$type,
-                           homogeneous=conf$homo,
-                           outfile=conf$outfile,
-                           verbose=conf$verbose)
+        stop("Unrecognized cluster type\n")
       }
    }
 
@@ -109,7 +111,10 @@ mvr <- function(data,
    }
 
    if (parallel) {
-      stopCluster(cl)
+      parallel::stopCluster(cl)
+      if (conf$type == "MPI") {
+         Rmpi::mpi.finalize()
+      }   
    }
 
    clus <- merging.cluster(M)
@@ -235,18 +240,20 @@ mvrt.test <- function(data,
    }
 
    if (parallel) {
-      if (conf$type == "SOCK") {
-         cl <- makeCluster(spec=conf$names,
-                           type=conf$type,
-                           homogeneous=conf$homo,
-                           outfile=conf$outfile,
-                           verbose=conf$verbose)
+      if (conf$type == "SOCKET") {
+         cl <- parallel::makeCluster(spec=conf$spec,
+                                     type="PSOCK",
+                                     homogeneous=conf$homo,
+                                     outfile=conf$outfile,
+                                     verbose=conf$verbose)
+      } else if (conf$type == "MPI") {
+        cl <- parallel::makeCluster(spec=conf$spec,
+                                     type="MPI",
+                                     homogeneous=conf$homo,
+                                     outfile=conf$outfile,
+                                     verbose=conf$verbose)
       } else {
-         cl <- makeCluster(spec=conf$cpus,
-                           type=conf$type,
-                           homogeneous=conf$homo,
-                           outfile=conf$outfile,
-                           verbose=conf$verbose)
+        stop("Unrecognized cluster type\n")
       }
    }
 
@@ -320,7 +327,10 @@ mvrt.test <- function(data,
    }
 
    if (parallel) {
-      stopCluster(cl)
+      parallel::stopCluster(cl)
+      if (conf$type == "MPI") {
+         Rmpi::mpi.finalize()
+      }
    }
 
    cat("Finished!\n")
