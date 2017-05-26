@@ -1,8 +1,3 @@
-# MVR
-Mean Variance Regularization
-
-
-=============
 ### License
 
 PRIMsrc is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
@@ -16,13 +11,13 @@ sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy
 CRAN downloads since October 1, 2012, 
 the month the [RStudio CRAN mirror](http://cran-logs.rstudio.com/) 
 started publishing logs:
-[![](http://cranlogs.r-pkg.org/badges/grand-total/MVR)](https://CRAN.R-project.org/package=MVR)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/MVR)](https://CRAN.R-project.org/package=MVR)
 
 CRAN downloads in the last month:
-[![](http://cranlogs.r-pkg.org/badges/last-month/MVR)](https://CRAN.R-project.org/package=MVR)
+[![](https://cranlogs.r-pkg.org/badges/last-month/MVR)](https://CRAN.R-project.org/package=MVR)
 
 CRAN downloads in the last week:
-[![](http://cranlogs.r-pkg.org/badges/last-week/MVR)](https://CRAN.R-project.org/package=MVR)
+[![](https://cranlogs.r-pkg.org/badges/last-week/MVR)](https://CRAN.R-project.org/package=MVR)
 
 
 ===============
@@ -75,13 +70,13 @@ The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver, BC, Can
 ================
 ### Installation
 
-* To install MVR from CRAN, simply download and install the current version (1.31.0) from the CRAN repository:
+* To install [`MVR` from CRAN repository](https://CRAN.R-project.org/package=MVR), simply download and install the current version (1.31.0) from the CRAN repository:
 
 ```{r}
 install.packages("MVR")
 ```
 
-* Alternatively, you can install the most up-to-date development version (1.31.0) from GitHub, using devtools:
+* Alternatively, you can install the most up-to-date development version (>= 1.31.0) of [`MVR` from GitHub repository](https://github.com/jedazard/MVR) using devtools, simply run:
 
 ```{r}
 install.packages("devtools")
@@ -125,3 +120,35 @@ citation("MVR")
 ```
 
 etc...
+
+
+===================
+### Acknowledgments
+
+Authors: 
+   + Jean-Eudes Dazard, Ph.D. [(jean-eudes.dazard@case.edu)](jean-eudes.dazard@case.edu)
+   + Hua Xu, Ph.D. [(huaxu77@gmail.com)](huaxu77@gmail.com)
+   + Alberto Santana, MBA. [(ahs4@case.edu)](ahs4@case.edu)
+
+Maintainers: 
+   + Jean-Eudes Dazard, Ph.D. [(jean-eudes.dazard@case.edu)](jean-eudes.dazard@case.edu)
+
+Funding/Provision/Help:   
+   + This work made use of the High Performance Computing Resource in the Core Facility for Advanced Research Computing at Case Western Reserve University. 
+   + This project was partially funded by the National Institutes of Health NIH - National Cancer Institute (P30-CA043703).
+
+
+==============
+### References
+              
+   + Dazard J-E. and J. S. Rao (2010). 
+      *Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data*. 
+      In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
+      Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
+   + Dazard J-E., Hua Xu and J. S. Rao (2011). 
+      *R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization*. 
+      In JSM Proceedings, Section for Statistical Programmers and Analysts. 
+      Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
+   + Dazard J-E. and J. S. Rao (2012). 
+      *Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data*. 
+      Comput. Statist. Data Anal. 56(7):2317-2333.

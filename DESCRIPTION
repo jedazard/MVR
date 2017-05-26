@@ -21,6 +21,7 @@ Description: This is a non-parametric method for joint adaptive mean-variance re
             (iv) Computationally efficient implementation using C/C++ interfacing and an option for parallel computing to enjoy a faster and easier experience in the R environment.
 Depends: R (>= 3.0.2), statmod
 Imports: parallel, Rmpi
+NeedsCompilation: yes
 URL: https://github.com/jedazard/MVR
 Repository: CRAN
 License: GPL (>= 3) | file LICENSE

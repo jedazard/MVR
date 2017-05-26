@@ -2,7 +2,8 @@ useDynLib("MVR", .registration=TRUE)
 
 import("statmod")
 
-import("parallel"
+import("parallel")
+import("Rmpi")
 import("graphics")
 import("grDevices")
 import("methods")
