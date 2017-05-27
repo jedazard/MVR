@@ -111,10 +111,7 @@ mvr <- function(data,
    }
 
    if (parallel) {
-      parallel::stopCluster(cl)
-      if (conf$type == "MPI") {
-         Rmpi::mpi.finalize()
-      }   
+      parallel::stopCluster(cl)  
    }
 
    clus <- merging.cluster(M)
@@ -328,9 +325,6 @@ mvrt.test <- function(data,
 
    if (parallel) {
       parallel::stopCluster(cl)
-      if (conf$type == "MPI") {
-         Rmpi::mpi.finalize()
-      }
    }
 
    cat("Finished!\n")
