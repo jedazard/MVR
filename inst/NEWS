@@ -58,5 +58,13 @@ PACKAGE INSTALLATION
 - Updated Rd, NEWS and CITATION files.  
 - Built and tested under R-devel (2016-06-30 r70858) and release update to GitHub.
 ---------------------------------------------------------------------------------
+Date   : 2017-05-26
+o RELEASE 1.32.0
+- Minor corrections in documentation, examples and good practices in R and C/C++ codes
+  to register native routines and disable symbol search.
+PACKAGE INSTALLATION
+- Updated Rd, DESCRIPTION, NEWS and NAMESPACE files.  
+- Built and tested under R version 3.4.0 (2017-04-21) and release update to GitHub.
+---------------------------------------------------------------------------------
 
 
