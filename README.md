@@ -87,7 +87,7 @@ devtools::install_github("jedazard/MVR")
 ================
 ### Requirements
 
-MVR 1.31.0 requires R-3.0.2 (2013-09-25). It was built and tested under R-devel (2016-06-30 r70858) and Travis CI. 
+MVR 1.32.0 requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.0 (2017-04-21) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
