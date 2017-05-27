@@ -76,7 +76,7 @@ The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver, BC, Can
 install.packages("MVR")
 ```
 
-* Alternatively, you can install the most up-to-date development version (>= 1.31.0) of [`MVR` from GitHub repository](https://github.com/jedazard/MVR) using devtools, simply run:
+* Alternatively, you can install the most up-to-date development version (>= 1.32.0) of [`MVR` from GitHub repository](https://github.com/jedazard/MVR) using devtools, simply run:
 
 ```{r}
 install.packages("devtools")
