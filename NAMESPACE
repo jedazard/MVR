@@ -3,11 +3,10 @@ useDynLib("MVR", .registration=TRUE)
 import("statmod")
 
 import("parallel")
-import("Rmpi")
 import("graphics")
 import("grDevices")
-import("methods")
 import("stats")
+importFrom("methods", "is")
 
 export("MVR.news", 
        "mvr",
