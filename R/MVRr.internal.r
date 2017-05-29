@@ -760,7 +760,7 @@ withinsumsq <- function(n, p, replic, k, parallel, seed) {
    SSver <- read.dcf(file=system.file("DESCRIPTION", package=pkgname), 
                      fields="Version")
    packageStartupMessage(paste(pkgname, " ", SSver, sep=""))
-   packageStartupMessage("Type MVR.news() to see new features, changes, and bug fixes\n")
-
+   packageStartupMessage("Type MVR.news() to see new features, changes, and bug fixes")
+   
 }
 ##########################################################################################################################################
