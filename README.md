@@ -1,23 +1,5 @@
-### License
-
-PRIMsrc is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
-sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy of this license, visit 
-[GNU Free Documentation License](http://www.gnu.org/licenses/gpl-3.0.html).
-
-
-=============
-### Downloads
-
-CRAN downloads since October 1, 2012, 
-the month the [RStudio CRAN mirror](http://cran-logs.rstudio.com/) 
-started publishing logs:
-[![](https://cranlogs.r-pkg.org/badges/grand-total/MVR)](https://CRAN.R-project.org/package=MVR)
-
-CRAN downloads in the last month:
-[![](https://cranlogs.r-pkg.org/badges/last-month/MVR)](https://CRAN.R-project.org/package=MVR)
-
-CRAN downloads in the last week:
-[![](https://cranlogs.r-pkg.org/badges/last-week/MVR)](https://CRAN.R-project.org/package=MVR)
+# MVR
+Mean-Variance Regularization
 
 
 ===============
@@ -42,47 +24,40 @@ computing to enjoy a fast and easy experience in the R environment
 
 See also below the package news with the R command: `MVR.news()`.
 
-
-============================
-### Documentation and Manual
-
 All the codes are in the R folder and a manual (MVR.pdf) details the end-user (and internal) functions. 
 At this stage and for simplicity, there are only 2 end-user function, 4 end-user diagnostic 
 and plotting functions and 2 end-user datasets (synthetic and real). 
 See the "MVR-package" introduction section of the manual for more details and examples.
 
 
-==============
-### References
+============
+### Branches
 
-Open access to companion papers (accepted for publication):
-
-- [Comput. Statist. Data Anal. (2012)](http://www.sciencedirect.com/science/article/pii/S0167947312000321).
-The Official Journal of the International Association for Statistical Computing.
-
-- [JSM (2011)](https://www.amstat.org/membersonly/proceedings/2011/papers/302266_68145.pdf). 
-The ASA Proceedings of the annual Joint Statistical Meetings (Miami, FL, USA).
-
-- [JSM (2010)](https://www.amstat.org/membersonly/proceedings/2010/papers/309104_62376.pdf). 
-The ASA Proceedings of the annual Joint Statistical Meetings (Vancouver, BC, Canada).
+- The default branch (master) hosts the current development release (version 1.32.0). 
 
 
-================
-### Installation
+===========
+### License
 
-* To install [`MVR` from CRAN repository](https://CRAN.R-project.org/package=MVR), simply download and install the current version (1.31.0) from the CRAN repository:
+PRIMsrc is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
+sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy of this license, visit 
+[GNU Free Documentation License](http://www.gnu.org/licenses/gpl-3.0.html).
 
-```{r}
-install.packages("MVR")
-```
 
-* Alternatively, you can install the most up-to-date development version (>= 1.32.0) of [`MVR` from GitHub repository](https://github.com/jedazard/MVR) using devtools, simply run:
+=============
+### Downloads
 
-```{r}
-install.packages("devtools")
-library("devtools")
-devtools::install_github("jedazard/MVR")
-```
+CRAN downloads since October 1, 2012, 
+the month the [RStudio CRAN mirror](http://cran-logs.rstudio.com/) 
+started publishing logs:
+[![](https://cranlogs.r-pkg.org/badges/grand-total/MVR)](https://CRAN.R-project.org/package=MVR)
+
+CRAN downloads in the last month:
+[![](https://cranlogs.r-pkg.org/badges/last-month/MVR)](https://CRAN.R-project.org/package=MVR)
+
+CRAN downloads in the last week:
+[![](https://cranlogs.r-pkg.org/badges/last-week/MVR)](https://CRAN.R-project.org/package=MVR)
+
 
 ================
 ### Requirements
@@ -97,6 +72,23 @@ See Travis CI build result:
 See CRAN checks:
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/MVR)](https://cran.r-project.org/web/checks/check_results_MVR.html).
 
+
+================
+### Installation
+
+* To install [`MVR` from CRAN repository](https://CRAN.R-project.org/package=MVR), simply download and install the current version (1.32.0) from the CRAN repository:
+
+```{r}
+install.packages("MVR")
+```
+
+* Alternatively, you can install the most up-to-date development version (>= 1.32.0) of [`MVR` from GitHub repository](https://github.com/jedazard/MVR) using devtools, simply run:
+
+```{r}
+install.packages("devtools")
+library("devtools")
+devtools::install_github("jedazard/MVR")
+```
 
 =========
 ### Usage
@@ -141,14 +133,19 @@ Funding/Provision/Help:
 ==============
 ### References
               
-   + Dazard J-E. and J. S. Rao (2010). 
-      *Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data*. 
-      In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
-      Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
-   + Dazard J-E., Hua Xu and J. S. Rao (2011). 
+   + Dazard J-E. and J. S. Rao.
+      *Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data*. 
+      [Comput. Statist. Data Anal. (2012)](http://www.sciencedirect.com/science/article/pii/S0167947312000321), 56(7):2317-2333.
+      (The Official Journal of the International Association for Statistical Computing).
+
+   + Dazard J-E., Hua Xu and J. S. Rao. 
       *R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization*. 
       In JSM Proceedings, Section for Statistical Programmers and Analysts. 
       Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
-   + Dazard J-E. and J. S. Rao (2012). 
-      *Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data*. 
-      Comput. Statist. Data Anal. 56(7):2317-2333.
+      [JSM (2011)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4725579/).
+
+   + Dazard J-E. and J. S. Rao. 
+      *Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data*. 
+      In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
+      Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
+      [JSM (2010)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4727967/).
