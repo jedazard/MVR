@@ -1,9 +1,10 @@
+#include <R.h>
+#include <Rinternals.h>
 #include <stdlib.h> // for NULL
 #include <R_ext/Rdynload.h>
 
 extern "C" {
 
-/* .C calls */
 extern void MVR_km_clustering(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void MVR_withinsumsq(void *, void *, void *, void *, void *, void *, void *, void *);
 
@@ -13,8 +14,7 @@ static const R_CMethodDef CEntries[] = {
     {NULL, NULL, 0}
 };
 
-void R_init_MVR(DllInfo *dll)
-{
+void R_init_MVR(DllInfo *dll) {
     R_registerRoutines(dll, CEntries, NULL, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
