@@ -66,5 +66,13 @@ PACKAGE INSTALLATION
 - Updated documentation, Rd, DESCRIPTION, NEWS and NAMESPACE files.  
 - Built and tested under R version 3.4.0 (2017-04-21) and release update to GitHub.
 ---------------------------------------------------------------------------------
+Date   : 2017-09-08
+o RELEASE 1.32.1
+BUG FIXES
+- NA values are now correctly handled in the internal function `is.empty()`.
+PACKAGE INSTALLATION
+- Minor updates in documentation files (DESCRIPTION and NEWS).
+- Built and tested under R version 3.4.1 (2017-06-30) and release update to GitHub.
+---------------------------------------------------------------------------------
 
 
