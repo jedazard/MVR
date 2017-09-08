@@ -128,10 +128,15 @@ statresamp <- function(X, block, nc.min, nc.max, resamp, replace, parallel, verb
 is.empty <- function(x) {
 
    if (is.vector(x)) {
-      if((length(x) == 0) || (x == "")) {
-         return(T)
+      y <- which(is.na(x))
+      if (length(y) != 0) {
+         return(FALSE)
       } else {
-         return(F)
+         if((length(x) == 0) || (x == "")) {
+            return(TRUE)
+         } else {
+            return(FALSE)
+         }
       }
    } else if (is.matrix(x) || is.data.frame(x)) {
       return( ((nrow(x) == 0) || (ncol(x) == 0)) )
