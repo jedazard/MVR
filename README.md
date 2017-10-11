@@ -1,5 +1,5 @@
 # MVR
-Mean-Variance Regularization
+Mean-Variance Regularization: a non-parametric method for joint adaptive mean-variance regularization and variance stabilization of high-dimensional data
 
 
 ===============
@@ -62,7 +62,7 @@ CRAN downloads in the last week:
 ================
 ### Requirements
 
-MVR (>= 1.32.1) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.1 (2017-06-30) and Travis CI. 
+MVR (>= 1.32.1) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.2 (2017-09-28) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
