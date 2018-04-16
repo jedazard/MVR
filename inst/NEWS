@@ -66,12 +66,14 @@ PACKAGE INSTALLATION
 - Updated documentation, Rd, DESCRIPTION, NEWS and NAMESPACE files.  
 - Built and tested under R version 3.4.0 (2017-04-21) and release update to GitHub.
 ---------------------------------------------------------------------------------
-Date   : 2017-10-11
+Date   : 2018-04-16
 o RELEASE 1.32.1
 BUG FIXES
 - NA values are now correctly handled in the internal function `is.empty()`.
+- a NULL value for the seed is now correctly handled in case of no parallelization 
+  in the internal functions `withinsumsq()` and `sim.dis()`.
 PACKAGE INSTALLATION
 - Minor updates in documentation files (DESCRIPTION, NEWS and README).
-- Built and tested under R version 3.4.2 (2017-09-28) and release update to GitHub.
+- Built and tested under R version 3.4.4 (2018-03-15) and release update to GitHub.
 ---------------------------------------------------------------------------------
 
