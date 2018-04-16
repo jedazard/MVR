@@ -62,7 +62,7 @@ CRAN downloads in the last week:
 ================
 ### Requirements
 
-MVR (>= 1.32.1) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.2 (2017-09-28) and Travis CI. 
+MVR (>= 1.32.1) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.4 (2018-03-15) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
@@ -76,8 +76,8 @@ See CRAN checks:
 ================
 ### Installation
 
-* To install the stable version (1.32.0) of `MVR` from the [CRAN](https://CRAN.R-project.org/package=MVR) repository, 
-simply download and install the current version (1.32.0) from the CRAN repository:
+* To install the stable version (1.32.1) of `MVR` from the [CRAN](https://CRAN.R-project.org/package=MVR) repository, 
+simply download and install the current version (1.32.1) from the CRAN repository:
 
 ```{r}
 install.packages("MVR")
