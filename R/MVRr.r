@@ -91,6 +91,8 @@ mvr <- function(data,
       } else {
         stop("Unrecognized cluster type\n")
       }
+   } else {
+        cl <- NULL
    }
 
    MVR <- vector(mode="list", length=ng)
@@ -252,6 +254,8 @@ mvrt.test <- function(data,
       } else {
         stop("Unrecognized cluster type\n")
       }
+   } else {
+        cl <- NULL
    }
 
    t.reg <- mvrt(x=data,

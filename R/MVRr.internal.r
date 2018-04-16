@@ -427,10 +427,7 @@ sim.dis <- function(data, k, B, parallel, cl, verbose, seed) {
    p <- ncol(data)
    replic <- 1:B
    if (!parallel) {
-      if (is.null(seed)) {
-         digits <- getOption("digits")
-         seed <- runif(n=B, min=1, max=2) * 10^(digits-2)
-      } else {
+      if (!is.null(seed)) {
          seed <- (0:(B-1)) + seed
       }
       lWk.mc <- withinsumsq(n=n,
@@ -616,7 +613,6 @@ km.clustering <- function(data, k, ns, maxiter, seed) {
    if (!is.null(seed)) {
       set.seed(seed)
    }
-
    data <- as.matrix(data)
    cn <- unique(data)
    n <- nrow(data)
@@ -695,7 +691,9 @@ withinsumsq <- function(n, p, replic, k, parallel, seed) {
    if (!parallel) {
 
       B <- length(replic)
-      set.seed(seed)
+      if (!is.null(seed)) {
+         set.seed(seed)
+      }
       W <- .C("MVR_withinsumsq",
               as.integer(n),
               as.integer(p),
@@ -762,10 +760,10 @@ withinsumsq <- function(n, p, replic, k, parallel, seed) {
 
 .onAttach <- function(libname, pkgname) {
 
-   SSver <- read.dcf(file=system.file("DESCRIPTION", package=pkgname), 
+   SSver <- read.dcf(file=system.file("DESCRIPTION", package=pkgname),
                      fields="Version")
    packageStartupMessage(paste(pkgname, " ", SSver, sep=""))
    packageStartupMessage("Type MVR.news() to see new features, changes, and bug fixes")
-   
+
 }
 ##########################################################################################################################################
