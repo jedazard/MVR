@@ -33,7 +33,7 @@ See the "MVR-package" introduction section of the manual for more details and ex
 ============
 ### Branches
 
-- The default branch (master) hosts the current development release (version 1.32.1). 
+- The default branch (master) hosts the current development release (version 1.33.0). 
 
 
 ===========
@@ -62,7 +62,7 @@ CRAN downloads in the last week:
 ================
 ### Requirements
 
-MVR (>= 1.32.1) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.4 (2018-03-15) and Travis CI. 
+MVR (>= 1.33.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.5.1 (2018-07-02) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
@@ -76,14 +76,14 @@ See CRAN checks:
 ================
 ### Installation
 
-* To install the stable version (1.32.1) of `MVR` from the [CRAN](https://CRAN.R-project.org/package=MVR) repository, 
-simply download and install the current version (1.32.1) from the CRAN repository:
+* To install the stable version (1.33.0) of `MVR` from the [CRAN](https://CRAN.R-project.org/package=MVR) repository, 
+simply download and install the current version (1.33.0) from the CRAN repository:
 
 ```{r}
 install.packages("MVR")
 ```
 
-* Alternatively, you can install the most up-to-date development version (>= 1.32.1) of `MVR` from the [GitHub](https://github.com/jedazard/MVR) repository, 
+* Alternatively, you can install the most up-to-date development version (>= 1.33.0) of `MVR` from the [GitHub](https://github.com/jedazard/MVR) repository, 
 simply run the following using devtools:
 
 ```{r}
