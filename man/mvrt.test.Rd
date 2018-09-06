@@ -35,8 +35,9 @@
               or a \code{data.frame} with all \code{numeric} columns). 
               Missing values (\code{NA}), NotANumber values (\code{NaN}) or Infinite values (\code{Inf}) are not allowed.}
   \item{obj}{Object of class \code{mvr} returned by \code{\link[MVR]{mvr}}.}
-  \item{block}{\code{character} or \code{numeric} \code{vector} or \code{factor} grouping/blocking variable 
-               of length the sample size (see details).}
+  \item{block}{\code{character} or \code{numeric} \code{vector}, or \code{factor} of group membership indicator variable 
+              (grouping/blocking variable) of length the data sample size with as many different values or \code{levels} 
+              as the number of data sample groups. Defaults to single group situation. See details.}
   \item{tolog}{\code{logical} scalar. Is the data to be log2-transformed first? Optional, defaults to \code{FALSE}.
              Note that negative or null values will be changed to 1 before taking log2-transformation.}
   \item{nc.min}{Positive \code{integer} scalar of the minimum number of clusters, defaults to 1}
@@ -67,10 +68,10 @@
 }
 
 \details{
-    Argument \code{block} is a \code{vector} or a \code{factor} grouping/blocking variable. It must be of length sample size 
-    with as many different \code{character} or \code{numeric} values as the number of levels or sample groups.
-    The number of sample groups must be greater or equal to 2, and all group sample sizes must be greater than 1, otherwise the program will stop.
-    
+    Argument \code{block} will be converted to a factor, whose levels will match the data groups. It defaults to a single group situation, 
+    that is, under the assumption of equal variance between sample groups. All group sample sizes must be greater than 1, 
+    otherwise the program will stop.
+
     Argument \code{nc.max} currently defaults to 30. Empirically, we found that this is enough for most datasets tested.
     This depends on (i) the dimensionality/sample size ratio \eqn{\frac{p}{n}}, (ii) the signal/noise ratio, and 
     (iii) whether a pre-transformation has been applied (see \cite{Dazard, J-E. and J. S. Rao (2012)} for more details).

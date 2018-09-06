@@ -31,9 +31,9 @@
               or an object that can be coerced to such a \code{matrix} (such as a \code{numeric} \code{vector}
               or a \code{data.frame} with all \code{numeric} columns).
               Missing values (\code{NA}), NotANumber values (\code{NaN}) or Infinite values (\code{Inf}) are not allowed.}
-  \item{block}{\code{character} or \code{numeric} \code{vector} or \code{factor} grouping/blocking variable of length the 
-              data sample size with as many different \code{character} or \code{numeric} values or \code{levels} as the 
-              number of data sample groups. Defaults to single group situation. See details.}
+  \item{block}{\code{character} or \code{numeric} \code{vector}, or \code{factor} of group membership indicator variable 
+              (grouping/blocking variable) of length the data sample size with as many different values or \code{levels} 
+              as the number of data sample groups. Defaults to single group situation. See details.}
   \item{tolog}{\code{logical} scalar. Is the data to be log2-transformed first? Optional, defaults to \code{FALSE}.
              Note that negative or null values will be changed to 1 before taking log2-transformation.}
   \item{nc.min}{Positive \code{integer} scalar of the minimum number of clusters, defaults to 1}
@@ -59,15 +59,16 @@
 }
 
 \details{
-    Argument \code{block} defaults to a single group situation, that is, under the assumption of equal variance between sample groups. 
-    All group sample sizes must be greater than 1, otherwise the program will stop.
+    Argument \code{block} will be converted to a factor, whose levels will match the data groups. It defaults to a single group situation, 
+    that is, under the assumption of equal variance between sample groups. All group sample sizes must be greater than 1, 
+    otherwise the program will stop.
 
     Argument \code{nc.max} currently defaults to 30. Empirically, we found that this is enough for most datasets tested.
     This depends on (i) the dimensionality/sample size ratio \eqn{\frac{p}{n}}, (ii) the signal/noise ratio, and
     (iii) whether a pre-transformation has been applied (see \cite{Dazard, J-E. and J. S. Rao (2012)} for more details).
     See the cluster diagnostic function \code{\link[MVR]{cluster.diagnostic}} for more details, whether larger values of \code{nc.max} may be required.
 
-    The function \code{mvr} relies on the R package \pkg{parallel} to create a parallel backend within an R session, enabling access to a cluster
+    The function \code{mvr} relies on the R package \pkg{parallel} to create a parallel backend within an R session. This enables access to a cluster
     of compute cores and/or nodes on a local and/or remote machine(s) and scaling-up with the number of CPU cores available and efficient parallel 
     execution. To run a procedure in parallel (with parallel RNG), argument \code{parallel} is to be set to \code{TRUE} and argument \code{conf} 
     is to be specified (i.e. non \code{NULL}). Argument \code{conf} uses the options described in function \code{makeCluster} of the R packages 
@@ -221,8 +222,10 @@ mvr.obj <- mvr(data = Synthetic,
        stop("'parallel' must be attached first \n")
     }
     #===================================================
-    # Example #1 - Quad core PC 
-    # Running WINDOWS with SOCKET communication
+    # Ex. #1 - Multicore PC
+    # Running WINDOWS
+    # SOCKET communication cluster
+    # Shared memory parallelization
     #===================================================
     cpus <- detectCores(logical = TRUE)
     conf <- list("spec" = rep("localhost", cpus),
@@ -231,10 +234,11 @@ mvr.obj <- mvr(data = Synthetic,
                  "verbose" = TRUE,
                  "outfile" = "")
     #===================================================
-    # Example #2 - Master node + 3 Worker nodes cluster
-    # Running LINUX with SOCKET communication
-    # All nodes equipped with identical setups of 
-    # multicores (8 core CPUs per machine for a total of 32)
+    # Ex. #2 - Master node + 3 Worker nodes cluster
+    # All nodes equipped with identical setups of multicores 
+    # (8 core CPUs per machine for a total of 32)
+    # SOCKET communication cluster
+    # Distributed memory parallelization
     #===================================================
     masterhost <- Sys.getenv("HOSTNAME")
     slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
@@ -247,17 +251,19 @@ mvr.obj <- mvr(data = Synthetic,
                  "verbose" = TRUE,
                  "outfile" = "")
     #===================================================
-    # Example #3 - Multinode of multicore per node cluster
-    # Running LINUX with SLURM scheduler and MPI communication
-    # Below, variable 'cpus' is the total number 
-    # of requested core CPUs, which is specified from  
-    # within a SLURM script.
-    #===================================================
+    # Ex. #3 - Enterprise Multinode Cluster w/ multicore/node  
+    # Running LINUX with SLURM scheduler
+    # MPI communication cluster
+    # Distributed memory parallelisation
+    #==================================================
     if (require("Rmpi")) {
         print("'Rmpi' is attached correctly \n")
     } else {
         stop("'Rmpi' must be attached first \n")
     }
+    # Below, variable 'cpus' is the total number of requested 
+    # taks (threads/CPUs), which is specified from within a 
+    # SLURM script.
     cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
     conf <- list("spec" = cpus,
                  "type" = "MPI",
