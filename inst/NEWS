@@ -76,12 +76,12 @@ PACKAGE INSTALLATION
 - Minor updates in documentation files (DESCRIPTION, NEWS and README).
 - Built and tested under R version 3.4.4 (2018-03-15) and release update to GitHub.
 ---------------------------------------------------------------------------------
-Date   : 2018-08-30
+Date   : 2018-09-06
 o RELEASE 1.33.0
 BUG FIXES
 - Argument `block` now correctly handles the case of a factor when the option `labels`
-  or `levels` are not used to define the factor. This ensures that its levels match the 
-  data groups.
+  or `levels` is not used to define the factor, which could cause its levels to not 
+  match the data groups.
 PACKAGE INSTALLATION
 - Minor updates in manual and documentation files (Rd files).
 - Minor updates in documentation files (DESCRIPTION, NEWS, and README).
