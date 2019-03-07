@@ -66,7 +66,7 @@ mvr <- function(data,
       tab[g] <- length(def[[g]])
    }
 
-   X.raw <- data
+   X.raw <- as.matrix(data)
    if (tolog) {
       if (!is.empty(which(data <= 0))) {
          data[data <= 0] <- 1
@@ -126,7 +126,8 @@ mvr <- function(data,
       vec.sd[ind] <- mean(pooled.sd(x=data[, ind, drop=FALSE], block=block))
    }
    X.mvr <- scale(x=data, center=vec.av, scale=vec.sd)
-
+   X.mvr <- as.matrix(X.mvr)
+   
    cat("Finished!\n")
 
    return(structure(list(Xraw = X.raw,
@@ -140,7 +141,7 @@ mvr <- function(data,
                          nc.max = nc.max,
                          probs = probs,
                          seed = seed),
-                    class = "mvr"))
+                    class = "MVR"))
 
 }
 ##########################################################################################################################################
@@ -336,7 +337,7 @@ mvrt.test <- function(data,
    return(structure(list(statistic = t.reg,
                          p.value = p.value,
                          seed = seed),
-                    class = "mvrt.test"))
+                    class = "MVRT"))
 
 }
 ##########################################################################################################################################
@@ -679,7 +680,7 @@ stabilization.diagnostic <- function(obj,
    stabplot <- function(obj, title, span, degree, family, ...) {
       par(mfrow=c(1, 2), oma=c(0, 0, 3, 0), mar=c(4, 3, 3, 1), mgp=c(2, 0.5, 0), xpd=FALSE)
 
-      block <- obj$block
+      block <- factor(x=obj$block, levels=unique(as.character(obj$block)))
       data.raw <- obj$Xraw
       data.mvr <- obj$Xmvr
 
