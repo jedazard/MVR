@@ -27,21 +27,28 @@
 }
 
 \arguments{
-  \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
-  \item{title}{Title of the plot. Defaults to "Cluster Diagnostic Plots".}
+  \item{obj}{Object of class "\code{MVR}" returned by \code{\link[MVR]{mvr}}.}
+  \item{title}{Title of the plot. 
+               Defaults to "Cluster Diagnostic Plots".}
   \item{span}{Span parameter of the \code{loess()} function (R package \pkg{stats}), which controls the degree of smoothing. 
               Defaults to 0.75.}
-  \item{degree}{Degree parameter of the \code{loess()} function (R package \pkg{stats}), which controls the degree of the polynomials to be used. 
+  \item{degree}{Degree parameter of the \code{loess()} function (R package \pkg{stats}), 
+                which controls the degree of the polynomials to be used. 
                 Defaults to 2. (Normally 1 or 2. Degree 0 is also allowed, but see the "Note" in loess {stats} package.)}
-  \item{family}{Family distribution in {"gaussian", "symmetric"} of the \code{loess()} function (R package \pkg{stats}), used for local fitting .
-                If "gaussian" fitting is by least-squares, and if "symmetric" a re-descending M estimator is used with Tukey's biweight function.}
+  \item{family}{Family distribution in {"gaussian", "symmetric"} of the \code{loess()} function (R package \pkg{stats}),
+                used for local fitting. If "gaussian" fitting is by least-squares, and if "symmetric" is used, 
+                a re-descending M estimator is used with Tukey's biweight function.
+                Defaults to "gaussian".}
   \item{device}{Graphic display device in \{NULL, "PS", "PDF"\}. Defaults to NULL (standard output screen).
                 Currently implemented graphic display devices are "PS" (Postscript) or "PDF" (Portable Document Format).}
   \item{file}{File name for output graphic. Defaults to "Cluster Diagnostic Plots".}
   \item{path}{Absolute path (without final (back)slash separator). Defaults to working directory path.}
-  \item{horizontal}{\code{Logical} scalar. Orientation of the printed image. Defaults to \code{FALSE}, that is potrait orientation.}
-  \item{width}{\code{Numeric} scalar. Width of the graphics region in inches. Defaults to 8.5.}
-  \item{height}{\code{Numeric} scalar. Height of the graphics region in inches. Defaults to 11.}
+  \item{horizontal}{\code{Logical} scalar. Orientation of the printed image. 
+                    Defaults to \code{FALSE}, that is potrait orientation.}
+  \item{width}{\code{Numeric} scalar. Width of the graphics region in inches. 
+                                      Defaults to 8.5.}
+  \item{height}{\code{Numeric} scalar. Height of the graphics region in inches. 
+                                       Defaults to 11.}
   \item{\dots}{Generic arguments passed to other plotting functions.}
 }
 

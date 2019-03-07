@@ -23,7 +23,7 @@
 }
 
 \arguments{
-  \item{obj}{Object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}.}
+  \item{obj}{Object of class "\code{MVR}" returned by \code{\link[MVR]{mvr}}.}
   \item{title}{Title of the plot. Defaults to "Stabilization Diagnostic Plots".}
   \item{span}{Span parameter of the \code{loess()} function (R package \pkg{stats}), which controls the degree of smoothing. 
               Defaults to 0.75.}

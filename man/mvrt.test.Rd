@@ -8,7 +8,7 @@
     End-user function for computing MVR t-test statistic and its significance (p-value) 
     under sample group homoscedasticity or heteroscedasticity assumption. 
     
-    Return an object of class "\code{mvrt.test}". Offers the option of parallel computation for 
+    Return an object of class "\code{MVRT}". Offers the option of parallel computation for 
     improved efficiency.
 }
 
@@ -31,10 +31,10 @@
 \arguments{
   \item{data}{\code{numeric} \code{matrix} of untransformed (raw) data, 
               where samples are by rows and variables (to be clustered) are by columns, 
-              or an object that can be coerced to such a \code{matrix} (such as a \code{numeric} \code{vector} 
+              or an object that can be coerced to a \code{matrix} (such as a \code{numeric} \code{vector} 
               or a \code{data.frame} with all \code{numeric} columns). 
               Missing values (\code{NA}), NotANumber values (\code{NaN}) or Infinite values (\code{Inf}) are not allowed.}
-  \item{obj}{Object of class \code{mvr} returned by \code{\link[MVR]{mvr}}.}
+  \item{obj}{Object of class "\code{MVR}" returned by \code{\link[MVR]{mvr}}.}
   \item{block}{\code{character} or \code{numeric} \code{vector}, or \code{factor} of group membership indicator variable 
               (grouping/blocking variable) of length the data sample size with as many different values or \code{levels} 
               as the number of data sample groups. Defaults to single group situation. See details.}
@@ -79,7 +79,7 @@
 
     To save un-necessary computations, previously computed MVR clustering can be provided through option \code{obj} (i.e. \code{obj} is fully 
     specified as a \code{\link[MVR]{mvr}} object). In this case, arguments \code{data}, \code{block}, \code{tolog}, \code{nc.min}, \code{nc.max} 
-    are ignored. If \code{obj} is fully specified (i.e. an object of class "\code{mvr}" returned by \code{\link[MVR]{mvr}}), the 
+    are ignored. If \code{obj} is fully specified (i.e. an object of class "\code{MVR}" returned by \code{\link[MVR]{mvr}}), the 
     the MVR clustering provided by \code{obj} will be used for the computation of the regularized t-test statistics. 
     If \code{obj}=\code{NULL}, a MVR clustering computation for the regularized t-test statistics and/or p-values will be performed.
     
@@ -238,13 +238,15 @@ mvrt.obj <- mvrt.test(data = NULL,
     # Examples of parallel backend parametrization 
     #===================================================
     if (require("parallel")) {
-       print("'parallel' is attached correctly \n")
+       cat("'parallel' is attached correctly \n")
     } else {
        stop("'parallel' must be attached first \n")
     }
     #===================================================
-    # Example #1 - Quad core PC 
-    # Running WINDOWS with SOCKET communication
+    # Ex. #1 - Multicore PC
+    # Running WINDOWS
+    # SOCKET communication cluster
+    # Shared memory parallelization
     #===================================================
     cpus <- parallel::detectCores(logical = TRUE)
     conf <- list("spec" = rep("localhost", cpus),
@@ -253,10 +255,11 @@ mvrt.obj <- mvrt.test(data = NULL,
                  "verbose" = TRUE,
                  "outfile" = "")
     #===================================================
-    # Example #2 - Master node + 3 Worker nodes cluster
-    # Running LINUX with SOCKET communication
-    # All nodes equipped with identical setups of 
-    # multicores (8 core CPUs per machine for a total of 32)
+    # Ex. #2 - Master node + 3 Worker nodes cluster
+    # All nodes equipped with identical setups of multicores 
+    # (8 core CPUs per machine for a total of 32)
+    # SOCKET communication cluster
+    # Distributed memory parallelization
     #===================================================
     masterhost <- Sys.getenv("HOSTNAME")
     slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
@@ -269,17 +272,19 @@ mvrt.obj <- mvrt.test(data = NULL,
                  "verbose" = TRUE,
                  "outfile" = "")
     #===================================================
-    # Example #3 - Multinode of multicore per node cluster
-    # Running LINUX with SLURM scheduler and MPI communication
-    # Below, variable 'cpus' is the total number 
-    # of requested core CPUs, which is specified from  
-    # within a SLURM script.
-    #===================================================
+    # Ex. #3 - Enterprise Multinode Cluster w/ multicore/node  
+    # Running LINUX with SLURM scheduler
+    # MPI communication cluster
+    # Distributed memory parallelization
+    #==================================================
     if (require("Rmpi")) {
-        print("'Rmpi' is attached correctly \n")
+        cat("'Rmpi' is attached correctly \n")
     } else {
         stop("'Rmpi' must be attached first \n")
     }
+    # Below, variable 'cpus' is the total number of requested 
+    # taks (threads/CPUs), which is specified from within a 
+    # SLURM script.
     cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
     conf <- list("spec" = cpus,
                  "type" = "MPI",

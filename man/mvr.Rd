@@ -8,7 +8,7 @@
     End-user function for Mean-Variance Regularization (MVR) and Variance Stabilization by similarity statistic
     under sample group homoscedasticity or heteroscedasticity assumptions.
 
-    Return an object of class "\code{mvr}". Offers the option of parallel computation for improved efficiency.
+    Return an object of class "\code{MVR}". Offers the option of parallel computation for improved efficiency.
 }
 
 \usage{
@@ -28,7 +28,7 @@
 \arguments{
   \item{data}{\code{numeric} \code{matrix} of untransformed (raw) data,
               where samples are by rows and variables (to be clustered) are by columns,
-              or an object that can be coerced to such a \code{matrix} (such as a \code{numeric} \code{vector}
+              or an object that can be coerced to a \code{matrix} (such as a \code{numeric} \code{vector}
               or a \code{data.frame} with all \code{numeric} columns).
               Missing values (\code{NA}), NotANumber values (\code{NaN}) or Infinite values (\code{Inf}) are not allowed.}
   \item{block}{\code{character} or \code{numeric} \code{vector}, or \code{factor} of group membership indicator variable 
@@ -217,7 +217,7 @@ mvr.obj <- mvr(data = Synthetic,
     # Examples of parallel backend parametrization 
     #===================================================
     if (require("parallel")) {
-       print("'parallel' is attached correctly \n")
+       cat("'parallel' is attached correctly \n")
     } else {
        stop("'parallel' must be attached first \n")
     }
@@ -227,7 +227,7 @@ mvr.obj <- mvr(data = Synthetic,
     # SOCKET communication cluster
     # Shared memory parallelization
     #===================================================
-    cpus <- detectCores(logical = TRUE)
+    cpus <- parallel::detectCores(logical = TRUE)
     conf <- list("spec" = rep("localhost", cpus),
                  "type" = "SOCKET",
                  "homo" = TRUE,
@@ -246,7 +246,7 @@ mvr.obj <- mvr(data = Synthetic,
     cpus <- 8
     conf <- list("spec" = c(rep(masterhost, cpus),
                             rep(slavehosts, cpus)),
-                 "type" = "SOCKETs",
+                 "type" = "SOCKET",
                  "homo" = TRUE,
                  "verbose" = TRUE,
                  "outfile" = "")
@@ -254,10 +254,10 @@ mvr.obj <- mvr(data = Synthetic,
     # Ex. #3 - Enterprise Multinode Cluster w/ multicore/node  
     # Running LINUX with SLURM scheduler
     # MPI communication cluster
-    # Distributed memory parallelisation
+    # Distributed memory parallelization
     #==================================================
     if (require("Rmpi")) {
-        print("'Rmpi' is attached correctly \n")
+        cat("'Rmpi' is attached correctly \n")
     } else {
         stop("'Rmpi' must be attached first \n")
     }
