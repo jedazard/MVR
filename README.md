@@ -33,7 +33,7 @@ See the "MVR-package" introduction section of the manual for more details and ex
 ============
 ### Branches
 
-- The default branch (master) hosts the current development release (version 1.34.0). 
+This branch (master) is the  default one, that hosts the current development release (version 1.34.0).
 
 
 ===========
@@ -62,7 +62,7 @@ CRAN downloads in the last week:
 ================
 ### Requirements
 
-MVR (>= 1.34.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.5.2 (2018-12-20) and Travis CI. 
+MVR (>= 1.34.0) requires R-3.5.0 (2018-04-23). It was built and tested under R version 4.0.3 (2020-10-10) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
