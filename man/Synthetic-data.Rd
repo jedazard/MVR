@@ -13,7 +13,9 @@
     This is a balanced design with two sample groups (\eqn{G=2}), under unequal sample group variance.
 }
 
-\usage{Synthetic}
+\usage{
+    data("Synthetic", package="MVR")
+}
 
 \format{
     A numeric matrix containing \eqn{n=10} observations (samples) by rows 

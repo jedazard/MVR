@@ -21,7 +21,9 @@
     This is a balanced design with two sample groups (\eqn{G=2}), under unequal sample group variance.
 }
 
-\usage{Real}
+\usage{
+    data("Real", package="MVR")
+}
 
 \format{
     A numeric matrix containing \eqn{n=6} observations (samples) by rows and 

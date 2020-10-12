@@ -205,6 +205,7 @@ library("MVR")
 # Without computation of p-values
 # Without cluster usage
 #================================================
+data("Synthetic", package="MVR")
 nc.min <- 1
 nc.max <- 10
 probs <- seq(0, 1, 0.01)
@@ -276,15 +277,10 @@ mvrt.obj <- mvrt.test(data = NULL,
     # Running LINUX with SLURM scheduler
     # MPI communication cluster
     # Distributed memory parallelization
-    #==================================================
-    if (require("Rmpi")) {
-        cat("'Rmpi' is attached correctly \n")
-    } else {
-        stop("'Rmpi' must be attached first \n")
-    }
     # Below, variable 'cpus' is the total number of requested 
     # taks (threads/CPUs), which is specified from within a 
     # SLURM script.
+    #==================================================
     cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
     conf <- list("spec" = cpus,
                  "type" = "MPI",
@@ -296,6 +292,7 @@ mvrt.obj <- mvrt.test(data = NULL,
     # Multi-Group Assumption
     # Assuming unequal variance between groups
     #===================================================
+    data("Real", package="MVR")
     nc.min <- 1
     nc.max <- 30
     probs <- seq(0, 1, 0.01)
