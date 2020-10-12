@@ -321,7 +321,7 @@ mvrt.test <- function(data,
       for (j in 1:p) {
          x <- sum(abs(stat.bo[,j]) > abs(t.reg[j]), na.rm=TRUE)
          if (replace == FALSE) {
-            p.value[j] <- permp(x=x, n1=tab[1], n2=tab[2], nperm=n.resamp)
+            p.value[j] <- statmod::permp(x=x, n1=tab[1], n2=tab[2], nperm=n.resamp)
          } else {
             p.value[j] <- x/n.resamp
          }
