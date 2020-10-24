@@ -126,23 +126,32 @@ statresamp <- function(X, block, nc.min, nc.max, resamp, replace, parallel, verb
 ##########################################################################################################################################
 
 is.empty <- function(x) {
-
-   if (is.vector(x)) {
-      y <- which(is.na(x))
-      if (length(y) != 0) {
-         return(FALSE)
+  
+  if (is.null(x)) {
+    return(TRUE)
+  } else if (is.vector(x, mode="any")) {
+    na <- is.na(x)
+    if (length(which(na)) != 0) {
+      return(FALSE)  #NA is a non-empty value
+    } else {
+      x <- x[!na]
+      if (is.character(x)) {
+        if (length(x) == 0) {
+          return(TRUE)
+        } else if (length(x) > 0) {
+          return( all(sapply(as.list(x), function(x) {x == ""})) )
+        }
       } else {
-         if((length(x) == 0) || (x == "")) {
-            return(TRUE)
-         } else {
-            return(FALSE)
-         }
-      }
-   } else if (is.matrix(x) || is.data.frame(x)) {
-      return( ((nrow(x) == 0) || (ncol(x) == 0)) )
-   } else {
-      return( ((length(x) == 0) || (x == "")) )
-   }
+        if (length(x) == 0) {
+          return(TRUE)
+        } else {
+          return(FALSE)
+        }
+      }      
+    }
+  } else if (is.matrix(x) || is.data.frame(x)) {
+    return( ((nrow(x) == 0) || (ncol(x) == 0)) )
+  } 
 
 }
 ##########################################################################################################################################
