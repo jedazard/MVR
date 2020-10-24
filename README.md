@@ -5,11 +5,11 @@ Mean-Variance Regularization: a non-parametric method for joint adaptive mean-va
 ===============
 ### Description
 
-MVR (Mean-Variance Regularization) is a non-parametric method for joint adaptive mean-variance regularization 
-and variance stabilization of high-dimensional data. It is suited for handling difficult problems posed by 
-high-dimensional multivariate datasets (_p_ >> _n_ paradigm), such as in omics-type data, 
-among which are that the variance is often a function of the mean, variable-specific estimators of variances are not reliable, 
-and tests statistics have low powers due to a lack of degrees of freedom.
+Implements a non-parametric method for joint adaptive mean-variance regularization and variance stabilization of 
+high-dimensional data (Dazard and Rao, 2012). It is suited for handling difficult problems posed by high-dimensional 
+multivariate datasets (_p_ >> _n_ paradigm), such as in omics-type data, among which are that the variance is often 
+a function of the mean, variable-specific estimators of variances are not reliable, and tests statistics have low powers 
+due to a lack of degrees of freedom.
 
 Key features include:
 
@@ -35,13 +35,12 @@ See the "MVR-package" introduction section of the manual for more details and ex
 
 This branch (master) is the  default one, that hosts the current development release (version 1.34.0).
 
-
 ===========
 ### License
 
-PRIMsrc is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
-sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy of this license, visit 
-[GNU Free Documentation License](http://www.gnu.org/licenses/gpl-3.0.html).
+MVR is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
+sponsored by the [Free Software Foundation](https://www.fsf.org/). To view a copy of this license, visit 
+[GNU Free Documentation License](https://www.gnu.org/licenses/gpl-3.0.html).
 
 
 =============
@@ -76,15 +75,14 @@ See CRAN checks:
 ================
 ### Installation
 
-* To install the stable version (1.34.0) of `MVR` from the [CRAN](https://CRAN.R-project.org/package=MVR) repository, 
-simply download and install the current version (1.34.0) from the CRAN repository:
+* To install the stable version of `MVR`, simply download and install the current version (1.34.0) from the [CRAN](https://CRAN.R-project.org/package=MVR) 
+repository:
 
 ```{r}
 install.packages("MVR")
 ```
 
-* Alternatively, you can install the most up-to-date development version (>= 1.34.0) of `MVR` from the [GitHub](https://github.com/jedazard/MVR) repository, 
-simply run the following using devtools:
+* Alternatively, you can install the most up-to-date development version (>= 1.34.0) of `MVR` from the [GitHub](https://github.com/jedazard/MVR) repository:
 
 ```{r}
 install.packages("devtools")
@@ -120,12 +118,12 @@ etc...
 ### Acknowledgments
 
 Authors: 
-   + Jean-Eudes Dazard, Ph.D. [(jean-eudes.dazard@case.edu)](jean-eudes.dazard@case.edu)
-   + Hua Xu, Ph.D. [(huaxu77@gmail.com)](huaxu77@gmail.com)
-   + Alberto Santana, MBA. [(ahs4@case.edu)](ahs4@case.edu)
+   + Jean-Eudes Dazard, Ph.D. <jean-eudes.dazard@case.edu>
+   + Hua Xu, Ph.D. <huaxu77@gmail.com>
+   + Alberto Santana, MBA. <ahs4@case.edu>
 
 Maintainers: 
-   + Jean-Eudes Dazard, Ph.D. [(jean-eudes.dazard@case.edu)](jean-eudes.dazard@case.edu)
+   + Jean-Eudes Dazard, Ph.D. <jean-eudes.dazard@case.edu>
 
 Funding/Provision/Help:   
    + This work made use of the High Performance Computing Resource in the Core Facility for Advanced Research Computing at Case Western Reserve University. 
@@ -137,7 +135,7 @@ Funding/Provision/Help:
               
    + Dazard J-E. and J. S. Rao.
       *Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data*. 
-      [Comput. Statist. Data Anal. (2012)](http://www.sciencedirect.com/science/article/pii/S0167947312000321), 56(7):2317-2333.
+      [Comput. Statist. Data Anal. (2012)](https://www.sciencedirect.com/science/article/abs/pii/S0167947312000321), 56(7):2317-2333.
       (The Official Journal of the International Association for Statistical Computing).
 
    + Dazard J-E., Hua Xu and J. S. Rao. 
