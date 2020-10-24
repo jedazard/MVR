@@ -87,16 +87,18 @@ PACKAGE INSTALLATION
 - Minor updates in documentation files (DESCRIPTION, NEWS, and README).
 - Built and tested under R version 3.5.1 (2018-07-02) and release update to GitHub.
 ---------------------------------------------------------------------------------
-Date   : 2020-10-12
+Date   : 2020-10-23
 o RELEASE 1.34.0
 SIGNIFICANT USER-VISIBLE CHANGES
 - Renamed objects returned by end-user functions `mvr()` and `mvrt.test()` as `MVR` and `MVRT`, respectively.
 - Corrected and updated Import and Depends field values of DESCRIPTION file.
+- Removed deprecated Lazyload and LazyData field values of DESCRIPTION file.
 BUG FIXES
+- Conditional tests in internal function `is.empty()` no longer coerce a Boolean vector
+  (logical of length > 1) to its first entry only (now passes R >= 3.6.0 CRAN check). 
 - Argument `block` now correctly handles the case of a factor when the option `labels` or `levels` is not used to define the factor, which could cause its levels to not match the data groups.
 - `Xraw` and `Xmvr` values of `MVR` object now correctly returns a matrix in all cases.
-- Removed deprecated Lazyload and LazyData field values of DESCRIPTION file.
-- Corrected corresponding field '\usage{data(...)}' in Rd manual files.
+- Corrected field '\usage{data(...)}' in Rd manual files.
 PACKAGE INSTALLATION
 - Minor updates in manual files (Rd files).
 - Minor updates in documentation files (DESCRIPTION, NEWS, and README).
