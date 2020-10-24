@@ -75,7 +75,7 @@ See CRAN checks:
 ================
 ### Installation
 
-* To install the stable version of `MVR`, simply download and install the current version (1.34.0) from the [CRAN](https://CRAN.R-project.org/package=MVR) 
+* To install the stable version of `MVR`, simply download and install the current version (1.33.0) from the [CRAN](https://CRAN.R-project.org/package=MVR) 
 repository:
 
 ```{r}
