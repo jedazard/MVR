@@ -3,8 +3,8 @@
 \docType{package}
 \title{Mean-Variance Regularization Package}
 \description{
-    MVR is a non-parametric method for joint adaptive mean-variance regularization
-    and variance stabilization of high-dimensional data.
+    Implements a non-parametric method for joint adaptive mean-variance regularization
+    and variance stabilization of high-dimensional data (Dazard and Rao, 2012).
 
     It is suited for handling difficult problems posed by high-dimensional multivariate datasets 
     (\eqn{p \gg n} paradigm), such as in omics-type data, among which are that the variance is 
@@ -106,13 +106,16 @@ Known Bugs/Problems : None at this time.
 
 \references{
     \itemize{
-        \item Dazard J-E. and J. S. Rao (2010). "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
+        \item Dazard J-E. and J. S. Rao (2010). 
+              "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
               In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
               Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
-        \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
+        \item Dazard J-E., Hua Xu and J. S. Rao (2011). 
+              "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
               In JSM Proceedings, Section for Statistical Programmers and Analysts. 
               Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
-        \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}"
+        \item Dazard J-E. and J. S. Rao (2012). 
+              "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}"
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }

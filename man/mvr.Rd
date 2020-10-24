@@ -137,13 +137,16 @@
 
 \references{
     \itemize{
-        \item Dazard J-E. and J. S. Rao (2010). "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
+        \item Dazard J-E. and J. S. Rao (2010). 
+              "\emph{Regularized Variance Estimation and Variance Stabilization of High-Dimensional Data.}"
               In JSM Proceedings, Section for High-Dimensional Data Analysis and Variable Selection. 
               Vancouver, BC, Canada: American Statistical Association IMS - JSM, 5295-5309.
-        \item Dazard J-E., Hua Xu and J. S. Rao (2011). "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
+        \item Dazard J-E., Hua Xu and J. S. Rao (2011). 
+              "\emph{R package MVR for Joint Adaptive Mean-Variance Regularization and Variance Stabilization.}"
               In JSM Proceedings, Section for Statistical Programmers and Analysts. 
               Miami Beach, FL, USA: American Statistical Association IMS - JSM, 3849-3863.
-        \item Dazard J-E. and J. S. Rao (2012). "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}"
+        \item Dazard J-E. and J. S. Rao (2012). 
+              "\emph{Joint Adaptive Mean-Variance Regularization and Variance Stabilization of High Dimensional Data.}"
               Comput. Statist. Data Anal. 56(7):2317-2333.
     }
 }
@@ -260,6 +263,11 @@ mvr.obj <- mvr(data = Synthetic,
     # taks (threads/CPUs), which is specified from within a 
     # SLURM script.
     #==================================================
+    if (require("Rmpi")) {
+        print("Rmpi is loaded correctly \n")
+    } else {
+        stop("Rmpi must be installed first to use MPI\n")
+    }
     cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
     conf <- list("spec" = cpus,
                  "type" = "MPI",

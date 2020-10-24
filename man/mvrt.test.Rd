@@ -281,6 +281,11 @@ mvrt.obj <- mvrt.test(data = NULL,
     # taks (threads/CPUs), which is specified from within a 
     # SLURM script.
     #==================================================
+    if (require("Rmpi")) {
+        print("Rmpi is loaded correctly \n")
+    } else {
+        stop("Rmpi must be installed first to use MPI\n")
+    }
     cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
     conf <- list("spec" = cpus,
                  "type" = "MPI",
